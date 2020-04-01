@@ -181,5 +181,5 @@ while True:
         mailserver.sendmail("mail", "mail", msg.as_string())
         mailserver.quit()
         print(time.strftime("%H:%M:%S") + " données envoyé !")
-    time.sleep(60)
+    time.sleep(300)
 

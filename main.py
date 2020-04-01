@@ -101,10 +101,15 @@ while True:
             "New Deaths", "Total Recovered", "Active Cases", "Critical"]
     numberOfDay = (date.today()-date(2020, 3, 16)).days
 
-    # Text data of day
     verif = False
+
+    # Get the last date in dataFrance.csv
+    f1 = open("data/dataFrance.csv", "r")
+    last_date = f1.readlines()[-1].split(',')[0]
+    f1.close()
+    
     try:
-        if (cases[6]):
+        if (cases[6] and last_date != str(date.today())):
             verif = True
     except:
         print(time.strftime("%H:%M:%S") + " données pas encore postées ")

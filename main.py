@@ -107,7 +107,7 @@ while True:
     f1 = open("data/dataFrance.csv", "r")
     last_date = f1.readlines()[-1].split(',')[0]
     f1.close()
-    
+
     try:
         if (cases[6] and last_date != str(date.today())):
             verif = True
@@ -160,8 +160,7 @@ while True:
         mailserver.ehlo()
         mailserver.starttls()
         mailserver.ehlo()
-        mailserver.login('mail@gmail.com', 'Password')
-        mailserver.sendmail('mail@gmail.com',
-                            'mail@gmail.com', msg.as_string())
+        mailserver.login(os.getenv("mailsend"), os.getenv("password"))
+        mailserver.sendmail(os.getenv("mailsend"), os.getenv("maildest"), msg.as_string())
         mailserver.quit()
     time.sleep(300)

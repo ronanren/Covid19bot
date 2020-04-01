@@ -18,7 +18,7 @@ locale.setlocale(locale.LC_TIME, '')
 
 
 def makeTabOfData():
-    global tabDate, tabTotalCases, tabNewCases, tabTotalDeaths, tabNewDeaths, tabTotalRecovered, tabActiveCases, tabCritical
+    global tabDate, tabTotalCases, tabNewCases, tabTotalDeaths, tabNewDeaths, tabTotalRecovered, tabActiveCases, tabCritical, tabNewRecovered, tabNewActive, tabNewCritical
     tabTotalCases = []
     tabNewCases = []
     tabTotalDeaths = []
@@ -26,6 +26,9 @@ def makeTabOfData():
     tabTotalRecovered = []
     tabActiveCases = []
     tabCritical = []
+    tabNewRecovered = []
+    tabNewActive = []
+    tabNewCritical = []
     tabDate = []
     with open('data/dataFrance.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -39,6 +42,9 @@ def makeTabOfData():
                 tabTotalRecovered.append(int(row[5].replace(".", "")))
                 tabActiveCases.append(int(row[6].replace(".", "")))
                 tabCritical.append(int(row[7].replace(".", "")))
+                tabNewRecovered.append(int(row[8].replace(".", "")))
+                tabNewActive.append(int(row[9].replace(".", "")))
+                tabNewCritical.append(int(row[10].replace(".", "")))
                 tabDate.append(line_count)
                 line_count += 1
             else:
@@ -48,9 +54,9 @@ def makeTabOfData():
 def makeGraph():
     # Graphique 1
     plt.plot(tabDate, tabTotalCases, "o-",
-             label="Population malade", linewidth=3, color="#9b59b6")
+             label="Population touchée", linewidth=3, color="#9b59b6")
     plt.plot(tabDate, tabActiveCases, "o-",
-             label="Population active", linewidth=3, color="#f1c40f")
+             label="Population malade", linewidth=3, color="#f1c40f")
     plt.plot(tabDate, tabTotalRecovered, "o-",
              label="Population guérie", linewidth=3, color="#2ecc71")
     plt.plot(tabDate, tabCritical, "o-",
@@ -69,16 +75,23 @@ def makeGraph():
     plt.savefig('data/' + str(date.today()) + '_1.png')
     plt.clf()
     # Graphique 2
-    plt.plot(tabDate, tabNewCases, "o-",
-             label="Population malade chaque jour", linewidth=3, color="#9b59b6")
-    plt.plot(tabDate, tabNewDeaths, "o-",
+    plt.plot(tabDate[1:], tabNewCases[1:], "o-",
+             label="Population touchée chaque jour", linewidth=3, color="#9b59b6")
+    plt.plot(tabDate[1:], tabNewActive[1:], "o-",
+             label="Population malade chaque jour", linewidth=3, color="#f1c40f")
+    plt.plot(tabDate[1:], tabNewRecovered[1:], "o-",
+             label="Population guérie chaque jour", linewidth=3, color="#2ecc71")
+    plt.plot(tabDate[1:], tabNewCritical[1:], "o-",
+             label="Population critique chaque jour", linewidth=3, color="#e74c3c")
+    plt.plot(tabDate[1:], tabNewDeaths[1:], "o-",
              label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
+    
 
-    plt.axis([0, numberOfDay + 1, 0, ceil(max(tabNewCases)/1000)*1000])
+    plt.axis([0, numberOfDay + 1, 0, ceil(max(tabNewCases + tabNewActive + tabNewRecovered + tabNewCritical + tabNewDeaths)/1000)*1000])
 
     plt.legend(loc='upper left')
     plt.grid(True)
-    plt.xlabel('Jours à partir du 17 mars 2020')
+    plt.xlabel('Jours à partir du 18 mars 2020')
     plt.ylabel('Population')
     plt.title('Avancé du COVID-19 en France du ' +
               str(date.today().strftime("%A %d %B %Y")))
@@ -111,6 +124,8 @@ while True:
     try:
         if (cases[6] and last_date != str(date.today())):
             verif = True
+        else:
+            print(time.strftime("%H:%M:%S") + " données déja postées ")
     except:
         print(time.strftime("%H:%M:%S") + " données pas encore postées ")
 
@@ -119,13 +134,15 @@ while True:
         f1 = open("data/dataFrance.csv", "r")
         last_line = f1.readlines()[-1].split(',')
         f1.close()
-        nouveauGueris = int(cases[4].replace(".", "")) - int(last_line[5].replace(".", ""))
-        nouveauCritique = int(cases[6].replace(".", "")) - int(last_line[7].replace(".", ""))
+        newRecovered = int(cases[4].replace(".", "")) - int(last_line[5].replace(".", ""))
+        newCritical = int(cases[6].replace(".", "")) - int(last_line[7].replace(".", ""))
+        newActive = int(cases[5].replace(".", "")) - int(last_line[6].replace(".", ""))
+    
 
         # Save data in csv file
         f = open("data/dataFrance.csv", "a+")
         f.write(str(date.today()) + "," + cases[0] + "," + cases[1] +
-                "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[5] + "," + cases[6] + "," + str(PlaceInWorld) + "\n")
+                "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[5] + "," + cases[6] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "\n")
         f.close()
 
         makeTabOfData()
@@ -137,11 +154,11 @@ while True:
         msg['To'] = 'mail@gmail.com'
         msg['Subject'] = 'Data bot'
         ligne1 = "La 🇫🇷 est " + str(PlaceInWorld) + "ème au 🌎\n"
-        ligne2 = "🟢 " + cases[4].replace(".", ",") + " guéris +" + str(nouveauGueris) + "\n"
-        ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + cases[1].replace(".", ",") + "\n"
-        ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(nouveauCritique) + "\n"
+        ligne2 = "🟢 " + cases[4].replace(".", ",") + " guéris +" + str(newRecovered) + "\n"
+        ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + str(newActive) + "\n"
+        ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + "\n"
         ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(".", ",") + "\n\n"
-        ligne6 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", ",")
+        ligne6 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")
         ligne7 = "\n\nGraphiques📈⏬\n#ConfinementJour" + str(numberOfDay)
         message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7
         msg.attach(MIMEText(message))
@@ -160,7 +177,9 @@ while True:
         mailserver.ehlo()
         mailserver.starttls()
         mailserver.ehlo()
-        mailserver.login(os.getenv("mailsend"), os.getenv("password"))
-        mailserver.sendmail(os.getenv("mailsend"), os.getenv("maildest"), msg.as_string())
+        mailserver.login("mail", "password")
+        mailserver.sendmail("mail", "mail", msg.as_string())
         mailserver.quit()
-    time.sleep(300)
+        print(time.strftime("%H:%M:%S") + " données envoyé !")
+    time.sleep(60)
+

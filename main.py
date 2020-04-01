@@ -6,6 +6,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from math import ceil
 import csv
+import locale
+
+# Mettre les dates en francais
+locale.setlocale(locale.LC_TIME, '')
 
 p = requests.get('https://www.worldometers.info/coronavirus/')
 
@@ -51,22 +55,55 @@ with open('data/dataFrance.csv') as csv_file:
     for row in csv_reader:
         if line_count != 0:
             tabTotalCases.append(int(row[1].replace(".", "")))
-            tabNewCases.append(row[2].replace(".", ""))
-            tabTotalDeaths.append(row[3].replace(".", ""))
-            tabNewDeaths.append(row[4].replace(".", ""))
-            tabTotalRecovered.append(row[5].replace(".", ""))
-            tabActiveCases.append(row[6].replace(".", ""))
-            tabCritical.append(row[7].replace(".", ""))
+            tabNewCases.append(int(row[2].replace(".", "")))
+            tabTotalDeaths.append(int(row[3].replace(".", "")))
+            tabNewDeaths.append(int(row[4].replace(".", "")))
+            tabTotalRecovered.append(int(row[5].replace(".", "")))
+            tabActiveCases.append(int(row[6].replace(".", "")))
+            tabCritical.append(int(row[7].replace(".", "")))
             tabDate.append(line_count)
             line_count += 1
         else:
             line_count += 1
-print(tabDate)
-print(tabTotalCases)
-plt.plot(tabDate, tabTotalCases, "o-",
-         label="Population malade", linewidth=3)
-plt.axis([0, numberOfDay, 0, ceil((int(cases[0].replace(".", ""))/5000))*5000])
-plt.legend()
-plt.grid(True)
 
+
+# Graphique 1
+plt.plot(tabDate, tabTotalCases, "o-",
+         label="Population malade", linewidth=3, color="#9b59b6")
+plt.plot(tabDate, tabActiveCases, "o-",
+         label="Population active", linewidth=3, color="#f1c40f")
+plt.plot(tabDate, tabTotalRecovered, "o-",
+         label="Population guérie", linewidth=3, color="#2ecc71")
+plt.plot(tabDate, tabCritical, "o-",
+         label="Population critique", linewidth=3, color="#e74c3c")
+plt.plot(tabDate, tabTotalDeaths, "o-",
+         label="Population décédée", linewidth=3, color="#2c3e50")
+
+
+plt.axis([0, numberOfDay, 0, ceil(
+    (int(cases[0].replace(".", ""))/5000))*5000])
+plt.legend(loc='upper left')
+plt.grid(True)
+plt.xlabel('Jours à partir du 17 mars 2020')
+plt.ylabel('Population')
+plt.title('Avancé du COVID-19 en France du ' +
+          str(date.today().strftime("%A %d %B %Y")))
+plt.show()
+# plt.savefig('data/' + str(date.today()) + '.png')
+
+# Graphique 2
+plt.plot(tabDate, tabNewCases, "o-",
+         label="Population touchée aujourd'hui", linewidth=3, color="#9b59b6")
+plt.plot(tabDate, tabNewDeaths, "o-",
+         label="Population décédée aujourd'hui", linewidth=3, color="#2c3e50")
+
+# plt.axis([0, numberOfDay, 0, ceil((int(cases[1].replace(".", ""))/1000))*1000])
+plt.axis([0, numberOfDay, 0, ceil(7500/1000)*1000])
+
+plt.legend(loc='upper left')
+plt.grid(True)
+plt.xlabel('Jours à partir du 17 mars 2020')
+plt.ylabel('Population')
+plt.title('Avancé du COVID-19 en France du ' +
+          str(date.today().strftime("%A %d %B %Y")))
 plt.show()

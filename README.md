@@ -1,2 +1,4 @@
 # Covid19bot
-Un bot twitter permettant d'afficher chaque jour les statistiques du COVID-19 
+Un bot permettant de donner chaque jour les statistiques du COVID-19 
+
+bot utilisé sur le compte twitter : https://twitter.com/FrenchCovid

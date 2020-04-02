@@ -138,6 +138,11 @@ while True:
         newCritical = int(cases[6].replace(".", "")) - int(last_line[7].replace(".", ""))
         newActive = int(cases[5].replace(".", "")) - int(last_line[6].replace(".", ""))
     
+        # percentage of new cases compared to yesterday's case
+        newRecoveredPercent = round(100 * (int(newRecovered)/int(last_line[8].replace(".", ""))), 2)
+        newActivePercent = round(100 * (int(newActive)/int(last_line[9].replace(".", ""))), 2)
+        newCriticalPercent = round(100 * (int(newCritical)/int(last_line[10].replace(".", ""))), 2)
+        newDeathPercent = round(100 * (int(cases[3].replace(".", ""))/int(last_line[4].replace(".", ""))), 2)
 
         # Save data in csv file
         f = open("data/dataFrance.csv", "a+")
@@ -154,10 +159,10 @@ while True:
         msg['To'] = 'mail@gmail.com'
         msg['Subject'] = 'Data bot'
         ligne1 = "La 🇫🇷 est " + str(PlaceInWorld) + "ème au 🌎\n"
-        ligne2 = "🟢 " + cases[4].replace(".", ",") + " guéris +" + str(newRecovered) + "\n"
-        ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + str(newActive) + "\n"
-        ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + "\n"
-        ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(".", ",") + "\n\n"
+        ligne2 = "🟢 " + cases[4].replace(".", ",") + " guéris +" + str(newRecovered) + " [" + str(newRecoveredPercent) + "%]\n"
+        ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + str(newActive) + " [" + str(newActivePercent) + "%]\n"
+        ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
+        ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(".", ",") + " [" + str(newDeathPercent) + "%]\n\n"
         ligne6 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")
         ligne7 = "\n\nGraphiques📈⏬\n#ConfinementJour" + str(numberOfDay)
         message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7

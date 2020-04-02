@@ -1,3 +1,11 @@
+
+
+# Covid19bot 🦠
+
+**Table of Contents**
+
+[[_TOC_]]
+
 # Features
 
 - Vérification régulier pour vérifier si les nouvelles données sont publiées
@@ -6,12 +14,6 @@
 - Création et envoi d'un message par mail des nouvelles statistiques et des 2 graphiques
 
 Bot utilisé sur le compte twitter : https://twitter.com/FrenchCovid
-
-# Covid19bot 🦠
-
-**Table of Contents**
-
-[TOC]
 
 ## Enregistrement en CSV
 

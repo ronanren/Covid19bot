@@ -182,8 +182,13 @@ while True:
         mailserver.ehlo()
         mailserver.starttls()
         mailserver.ehlo()
-        mailserver.login("mail", "password")
-        mailserver.sendmail("mail", "mail", msg.as_string())
+
+        maillogin = ""
+        mailpassword = ""
+        maildestination = ""
+        
+        mailserver.login(maillogin, mailpassword)
+        mailserver.sendmail(maillogin, maildestination, msg.as_string())
         mailserver.quit()
         print(time.strftime("%H:%M:%S") + " données envoyé !")
     time.sleep(300)

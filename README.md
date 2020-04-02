@@ -21,5 +21,5 @@ Date  | Total Cases | New Cases | Total Deaths | New Deaths | Total Recovered | 
 
 ## Exemple de message par mail
 
-![center](images/exampleMail.png)
+![](images/exampleMail.png | width=100)
 

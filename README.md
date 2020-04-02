@@ -17,7 +17,7 @@ Bot utilisé sur le compte twitter : https://twitter.com/FrenchCovid
 
 Date  | Total Cases | New Cases | Total Deaths | New Deaths | Total Recovered | Active Cases | Critical | New Recovered | New Active | New Critical | PlaceInWorld 
 ----- | ------------|--------|-----|-------|------|-----|-----|------|------|-----|----
-|
+
 
 ## Exemple de message par mail
 

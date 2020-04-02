@@ -1,4 +1,4 @@
-### Features
+# Features
 
 - Vérification régulier pour vérifier si les nouvelles données sont publiées
 - Enregistrement des nouvelles données quotidiennes dans un CSV
@@ -21,5 +21,5 @@ Date  | Total Cases | New Cases | Total Deaths | New Deaths | Total Recovered | 
 
 ## Exemple de message par mail
 
-![50% center](images/exampleMail.png)
+![10% center](images/exampleMail.png)
 

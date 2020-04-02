@@ -4,7 +4,7 @@
 
 - [Fonctionnalités](#Fonctionnalités)
 - [Enregistrement en CSV](#Enregistrement-en-CSV)
-- [Message par mail](#Message-par-mail-📧)
+- [Message par mail](#Message-par-mail)
 
 # Fonctionnalités
 
@@ -23,7 +23,7 @@ Bot utilisé sur le compte twitter : [@FrenchCovid](https://twitter.com/FrenchCo
 
 fichier csv mis à jour régulièrement : [dataFrance.csv](https://github.com/ronanren/Covid19bot/blob/master/data/dataFrance.csv)
 
-## Message par mail 📧
+## Message par mail
 
 #### exemple de message par mail :
 

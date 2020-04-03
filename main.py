@@ -63,7 +63,7 @@ def makeGraph():
              label="Population décédée", linewidth=3, color="#2c3e50")
 
     plt.axis([0, numberOfDay + 1, 0, ceil(
-        (int(cases[0].replace(".", ""))/5000))*5000])
+        (int(cases[0].replace(".", ""))/5000))*5000 + 5000])
     plt.legend(loc='upper left')
     plt.grid(True)
     plt.xlabel('Jours à partir du 17 mars 2020')
@@ -85,7 +85,7 @@ def makeGraph():
              label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
 
     plt.axis([0, numberOfDay + 1, 0, ceil(max(tabNewCases + tabNewActive +
-                                              tabNewRecovered + tabNewCritical + tabNewDeaths)/1000)*1000])
+                                              tabNewRecovered + tabNewCritical + tabNewDeaths)/1000)*1000 + 1000])
 
     plt.legend(loc='upper left')
     plt.grid(True)
@@ -166,6 +166,7 @@ while True:
         message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7
         msg.attach(MIMEText(message))
 
+
         # Attach graph to message
         imgurl1 = "data/" + str(date.today()) + "_1.png"
         imgurl2 = "data/" + str(date.today()) + "_2.png"
@@ -188,6 +189,5 @@ while True:
         mailserver.login(maillogin, mailpassword)
         mailserver.sendmail(maillogin, maildestination, msg.as_string())
         mailserver.quit()
-        
         print(time.strftime("%H:%M:%S") + " données envoyé !")
     time.sleep(60)

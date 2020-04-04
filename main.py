@@ -119,10 +119,6 @@ def makeGraph():
     for x in range(0,5):
         totalCasesCountries[x] = int(totalCasesCountries[x].replace(",", ""))
 
-    print (countries)
-    print (totalCasesCountries)
-    print (totalDeathsCountries)
-
     year = countries[::-1]
     totalcases = totalCasesCountries[::-1]
     deaths = totalDeathsCountries[::-1]
@@ -164,10 +160,9 @@ while True:
     f1 = open("data/dataFrance.csv", "r")
     last_line = f1.readlines()[-1].split(',')
     f1.close()
-
     try:
         # Checking that all data is up to date
-        if (last_line[0] != str(date.today()) and cases[8] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
+        if (last_line[0] != str(date.today()) and cases[10] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
             verif = True
         else:
             print(time.strftime("%H:%M:%S") + " données déja postées")

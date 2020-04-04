@@ -96,22 +96,66 @@ def makeGraph():
     plt.savefig('data/' + str(date.today()) + '_2.png')
     plt.clf()
 
+    # Graph 3
+    index = p.text.find('id="main_table_countries_today"')
+    indexEnd = index + p.text[index:].find("</table>")
+
+    countries = re.findall(r'(?<=<a class="mt_a" href="country\/)(.*)(?=\/">)', str(p.text[index:indexEnd]))
+    countries = [country.capitalize() for country in countries][:5]
+
+
+    totalcases = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){50})', str(p.text[index:indexEnd]))
+
+    totalCasesCountries = []
+    totalCasesCountries = (re.findall(r"[\d]{1,5},[\d]{3}", str(totalcases)))[:5]
+
+    totaldeaths = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){180})', str(p.text[index:indexEnd]))
+    totalDeathsCountries = []
+
+    for x in range(0,5):
+        totalDeathsCountries.append(int(re.findall(r"[\d]{1,5},[\d]{3}", str(totaldeaths[x][0][100:]))[0].replace(",", "")))
+
+
+    for x in range(0,5):
+        totalCasesCountries[x] = int(totalCasesCountries[x].replace(",", ""))
+
+    print (countries)
+    print (totalCasesCountries)
+    print (totalDeathsCountries)
+
+    year = countries[::-1]
+    totalcases = totalCasesCountries[::-1]
+    deaths = totalDeathsCountries[::-1]
+
+    totalcases = [totalcases[i]-deaths[i] for i in range(5)]
+
+    bar1 = plt.barh(year, deaths, color="#2c3e50", label="Population décédée", height=0.8)  
+    # careful: notice "bottom" parameter became "left"
+    bar2 = plt.barh(year, totalcases, left=deaths, color="#9b59b6", label="Population malade", height=0.8)
+
+    # we also need to switch the labels
+    plt.xlabel('Nombre total de malade et décès')  
+    plt.ylabel('Pays')
+
+    plt.legend(loc='lower right')
+    plt.title('Avancé du COVID-19 dans le monde du ' +
+              str(date.today().strftime("%A %d %B %Y")))
+    plt.savefig('data/' + str(date.today()) + '_3.png')
+    plt.clf()
+
 
 while True:
 
     # Parse data on worldometers.info
     p = requests.get('https://www.worldometers.info/coronavirus/')
 
-    indexFrance = p.text.find(
-        '<a class="mt_a" href="country/france/">France</a>')
+    indexFrance = p.text.find('<a class="mt_a" href="country/france/">France</a>')
     indexFranceEnd = indexFrance + p.text[indexFrance:].find("</tr>")
 
     PlaceInWorld = p.text[:indexFranceEnd].count('href="country/') + 1
 
-    cases = re.findall(r'[\d]{1,3}.[\d]{3}|\d+', str(
-        p.text[indexFrance:indexFranceEnd]).replace(",", "."))
-    data = ["Total Cases", "New Cases", "Total Deaths",
-            "New Deaths", "Total Recovered", "Active Cases", "Critical"]
+    cases = re.findall(r'[\d]{1,3}.[\d]{3}|\d+', str(p.text[indexFrance:indexFranceEnd]).replace(",", "."))
+    data = ["Total Cases", "New Cases", "Total Deaths", "New Deaths", "Total Recovered", "Active Cases", "Critical"]
     numberOfDay = (date.today()-date(2020, 3, 16)).days
 
     verif = False

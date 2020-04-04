@@ -148,7 +148,7 @@ while True:
     indexFrance = p.text.find('<a class="mt_a" href="country/france/">France</a>')
     indexFranceEnd = indexFrance + p.text[indexFrance:].find("</tr>")
 
-    PlaceInWorld = p.text[:indexFranceEnd].count('href="country/') + 1
+    PlaceInWorld = p.text[:indexFranceEnd].count('href="country/')
 
     cases = re.findall(r'[\d]{1,3}.[\d]{3}|\d+', str(p.text[indexFrance:indexFranceEnd]).replace(",", "."))
     data = ["Total Cases", "New Cases", "Total Deaths", "New Deaths", "Total Recovered", "Active Cases", "Critical"]
@@ -202,7 +202,7 @@ while True:
         ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(".", "") + " [" + str(newDeathPercent) + "%]\n\n"
         ligne6 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")
         ligne7 = "\n\nGraphiques📈⏬\n#ConfinementJour" + str(numberOfDay)
-        message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7
+        message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7 + "\n📈Évolution du #COVID19 en 🇫🇷"
         msg.attach(MIMEText(message))
 
 

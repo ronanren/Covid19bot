@@ -201,7 +201,7 @@ while True:
         ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + str(newActive) + " [" + str(newActivePercent) + "%]\n"
         ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
         ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(".", "") + " [" + str(newDeathPercent) + "%]\n"
-        ligne6 = "💉 " + cases[9].replace(".", ",") + "tests +" + str(newTests) + "\n\n"
+        ligne6 = "💉 " + cases[9].replace(".", ",") + " tests +" + str(newTests) + "\n\n"
         ligne7 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")
         ligne8 = "\n\nGraphiques📈⏬\n#ConfinementJour" + str(numberOfDay)
         message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7 + ligne8 + "\n📈Évolution du #COVID19 en 🇫🇷"

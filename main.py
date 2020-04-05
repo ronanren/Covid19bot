@@ -101,7 +101,7 @@ def makeGraph():
     indexEnd = index + p.text[index:].find("</table>")
 
     countries = re.findall(r'(?<=<a class="mt_a" href="country\/)(.*)(?=\/">)', str(p.text[index:indexEnd]))
-    countries = [country.capitalize() for country in countries][:5]
+    countries = [country.upper() for country in countries][:5]
 
 
     totalcases = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){50})', str(p.text[index:indexEnd]))
@@ -181,7 +181,6 @@ while True:
         newActivePercent = round(100 * (int(newActive)/int(last_line[9].replace(".", ""))), 2)
         newCriticalPercent = round(100 * (int(newCritical)/int(last_line[10].replace(".", ""))), 2)
         newDeathPercent = round(100 * (int(cases[3].replace(".", ""))/int(last_line[4].replace(".", ""))), 2)
-        newTestsPercent = round(100 * (int(cases[9].replace(".", ""))/int(last_line[12].replace(".", ""))), 2)
 
         # Save data in csv file
         f = open("data/dataFrance.csv", "a+")
@@ -202,22 +201,12 @@ while True:
         ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + str(newActive) + " [" + str(newActivePercent) + "%]\n"
         ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
         ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(".", "") + " [" + str(newDeathPercent) + "%]\n"
-        ligne6 = "💉 " + cases[9].replace(".", ",") + "tests +" + str(newTests) + " [" + str(newTestsPercent) + "%]\n\n"
+        ligne6 = "💉 " + cases[9].replace(".", ",") + "tests +" + str(newTests) + "\n\n"
         ligne7 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")
         ligne8 = "\n\nGraphiques📈⏬\n#ConfinementJour" + str(numberOfDay)
         message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7 + ligne8 + "\n📈Évolution du #COVID19 en 🇫🇷"
         msg.attach(MIMEText(message))
 
-
-        # Attach graph to message
-        imgurl1 = "data/" + str(date.today()) + "_1.png"
-        imgurl2 = "data/" + str(date.today()) + "_2.png"
-        img_data = open(imgurl1, 'rb').read()
-        image = MIMEImage(img_data, name=os.path.basename(imgurl1))
-        msg.attach(image)
-        img_data = open(imgurl2, 'rb').read()
-        image = MIMEImage(img_data, name=os.path.basename(imgurl2))
-        msg.attach(image)
 
         mailserver = smtplib.SMTP('smtp.gmail.com', 587)
         mailserver.ehlo()
@@ -232,4 +221,4 @@ while True:
         mailserver.sendmail(maillogin, maildestination, msg.as_string())
         mailserver.quit()
         print(time.strftime("%H:%M:%S") + " données envoyé !")
-    time.sleep(60)
+    time.sleep(30)

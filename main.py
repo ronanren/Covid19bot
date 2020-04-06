@@ -10,6 +10,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
+import config
 
 # Put the dates in french
 locale.setlocale(locale.LC_TIME, '')
@@ -213,9 +214,9 @@ while True:
         mailserver.starttls()
         mailserver.ehlo()
 
-        maillogin = ""
-        mailpassword = ""
-        maildestination = ""
+        maillogin = config.login
+        mailpassword = config.password
+        maildestination = config.maildestination
 
         mailserver.login(maillogin, mailpassword)
         mailserver.sendmail(maillogin, maildestination, msg.as_string())

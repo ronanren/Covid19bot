@@ -6,22 +6,24 @@
 - [Enregistrement en CSV](#Enregistrement-en-CSV)
 - [Message par mail](#Message-par-mail)
 
+Bot utilisé sur le compte twitter : [@FrenchCovid](https://twitter.com/FrenchCovid)
+
 # Fonctionnalités
 
 - Vérification régulier pour vérifier si les nouvelles données sont publiées
 - Enregistrement des nouvelles données quotidiennes dans un CSV
-- Création de 2 graphiques (statistiques total et statistiques quotidiennes)
-- Création et envoi d'un message par mail des nouvelles statistiques et des 2 graphiques
-
-Bot utilisé sur le compte twitter : [@FrenchCovid](https://twitter.com/FrenchCovid)
+- Création de 3 graphiques (statistiques total, statistiques quotidiennes et statistiques mondiales des 5 premiers pays les plus touchés)
+- Création et envoi d'un message par mail des nouvelles statistiques pour tweeter
 
 ## Enregistrement en CSV
 
-| Date | Total Cases | New Cases | Total Deaths | New Deaths | Total Recovered | Active Cases | Critical | New Recovered | New Active | New Critical | PlaceInWorld |
-| ---- | ----------- | --------- | ------------ | ---------- | --------------- | ------------ | -------- | ------------- | ---------- | ------------ | ------------ |
+Voici les données enregistrées au sein du CSV, si une donnée est à 0, c'est à dire que la donnée n'est pas connu
+
+| Date | Total Cases | New Cases | Total Deaths | New Deaths | Total Recovered | Active Cases | Critical | New Recovered | New Active | New Critical | PlaceInWorld | Total tests | New Tests |
+| ---- | ----------- | --------- | ------------ | ---------- | --------------- | ------------ | -------- | ------------- | ---------- | ------------ | ------------ | ----------- | --------- |
 
 
-fichier csv mis à jour régulièrement : [dataFrance.csv](https://github.com/ronanren/Covid19bot/blob/master/data/dataFrance.csv)
+Fichier csv mis à jour régulièrement : [dataFrance.csv](https://github.com/ronanren/Covid19bot/blob/master/data/dataFrance.csv)
 
 ## Message par mail
 
@@ -36,6 +38,12 @@ password = "password"
 maildestination = "mail"
 ```
 
-#### exemple de message par mail :
+#### Les pourcentages :
+
+Les pourcentages présentent l'évolution des chiffres par rapport aux chiffres de la veille.  
+Par exemple, si il y a 1000 nouveaux guéris hier et 1000 nouveaux guéris aujourd'hui, alors cela donne 100%  
+Une augmentation d'un chiffre par rapport à la veille donne un pourcentage > 100%
+
+#### exemple de message reçu par mail :
 
 <img src="images/exampleMail.png" width="500">

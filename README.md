@@ -25,6 +25,17 @@ fichier csv mis à jour régulièrement : [dataFrance.csv](https://github.com/ro
 
 ## Message par mail
 
+#### Gestion de connexion pour l'envoi de mail :
+
+- Modifier le fichier `config.example.py` en `config.py` avec vos identifiants gmail (si c'est autre que gmail, changer le serveur SMTP)
+- Format de `config.py` :
+
+```python
+login = "mail"
+password = "password"
+maildestination = "mail"
+```
+
 #### exemple de message par mail :
 
-<img src="images/exampleMail.png" width="300">
+<img src="images/exampleMail.png" width="500">

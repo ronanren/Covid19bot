@@ -2,7 +2,6 @@
 import requests
 import re
 from datetime import date
-import numpy as np
 import matplotlib.pyplot as plt
 from math import ceil
 import csv, os, time, locale
@@ -10,10 +9,14 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
+from halo import Halo
 import config
 
 # Put the dates in french
 locale.setlocale(locale.LC_TIME, '')
+spinner = Halo(text='Scrapping data', spinner='dots', color='cyan')
+spinner.start()
+
 
 
 def makeTabOfData():
@@ -143,6 +146,8 @@ def makeGraph():
 
 while True:
 
+    spinner.color = 'cyan'
+    spinner.text = 'Scrapping data'
     # Parse data on worldometers.info
     p = requests.get('https://www.worldometers.info/coronavirus/')
 
@@ -166,9 +171,10 @@ while True:
         if (last_line[0] != str(date.today()) and cases[10] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
             verif = True
         else:
-            print(time.strftime("%H:%M:%S") + " données déja postées")
+            spinner.color = 'magenta'
+            spinner.text = 'Data already published ' + time.strftime("%H:%M:%S")
     except:
-        print(time.strftime("%H:%M:%S") + " données pas encore postées")
+        spinner.text = 'Data not yet published ' + time.strftime("%H:%M:%S")
 
     if (verif):
         
@@ -221,5 +227,6 @@ while True:
         mailserver.login(maillogin, mailpassword)
         mailserver.sendmail(maillogin, maildestination, msg.as_string())
         mailserver.quit()
-        print(time.strftime("%H:%M:%S") + " données envoyé !")
+        spinner.succeed('Data sent ' + time.strftime("%H:%M:%S"))
+        spinner.start()
     time.sleep(30)

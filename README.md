@@ -3,16 +3,26 @@
 <h4 align="center">🤖 Bot permettant de donner chaque jour les statistiques du COVID-19 en France</h4>
 
 <p align="center">
+<a href="https://badge.fury.io/py/requests"><img src="https://badge.fury.io/py/requests.svg" alt="PyPI version" height="18"></a>
+  <a href="https://badge.fury.io/py/matplotlib"><img src="https://badge.fury.io/py/matplotlib.svg" alt="PyPI version" height="18"></a>
+  <a href="https://badge.fury.io/py/halo"><img src="https://badge.fury.io/py/halo.svg" alt="PyPI version" height="18"></a>
+  <a href="https://badge.fury.io/py/csv"><img src="https://badge.fury.io/py/csv.svg" alt="PyPI version" height="18"></a>
+</p>
+
+<p align="center">
   <a href="#Fonctionnalités">Fonctionnalités</a> |
   <a href="#Utilisation">Utilisation</a> |
   <a href="#Enregistrement-en-CSV">Enregistrement en CSV</a> |
-  <a href="#Message par mail">Message par mail</a> |
+  <a href="#Message-par-mail">Message par mail</a> |
+  <a href="#Licence">Licence</a> |
+  <a href="#Contactez-moi">Contactez-moi</a> |
   <br>
   <a href="https://www.ronanren.github.io">Consultez mon site personnel !</a> 
 </p>
-<img src="images/console.gif" width="400" style="display: block;
-  margin-left: auto;
-  margin-right: auto;">
+
+<p align="center">
+    <img src="images/console.gif" width="400">
+</p>
 
 Bot utilisé sur le compte twitter : [@FrenchCovid](https://twitter.com/FrenchCovid)
 
@@ -63,3 +73,11 @@ $ python main.py
 ### exemple de message reçu par mail :
 
 <img src="images/exampleMail.png" width="500">
+
+# Licence
+
+MIT
+
+# Contactez-moi
+
+**Twitter** : [@Ronanren](https://twitter.com/Ronanren)

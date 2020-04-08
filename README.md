@@ -1,10 +1,18 @@
 # Covid19bot 🦠
 
-# Table des matières
+<h4 align="center">🤖 Bot permettant de donner chaque jour les statistiques du COVID-19 en France</h4>
 
-- [Fonctionnalités](#Fonctionnalités)
-- [Enregistrement en CSV](#Enregistrement-en-CSV)
-- [Message par mail](#Message-par-mail)
+<p align="center">
+  <a href="#Fonctionnalités">Fonctionnalités</a> |
+  <a href="#Utilisation">Utilisation</a> |
+  <a href="#Enregistrement-en-CSV">Enregistrement en CSV</a> |
+  <a href="#Message par mail">Message par mail</a> |
+  <br>
+  <a href="https://www.ronanren.github.io">Consultez mon site personnel !</a> 
+</p>
+<img src="images/console.gif" width="400" style="display: block;
+  margin-left: auto;
+  margin-right: auto;">
 
 Bot utilisé sur le compte twitter : [@FrenchCovid](https://twitter.com/FrenchCovid)
 
@@ -15,39 +23,43 @@ Bot utilisé sur le compte twitter : [@FrenchCovid](https://twitter.com/FrenchCo
 - Création de 3 graphiques (statistiques total, statistiques quotidiennes et statistiques mondiales des 5 premiers pays les plus touchés)
 - Création et envoi d'un message par mail des nouvelles statistiques pour tweeter
 
-<img src="images/console.gif" width="400" style="margin-left: 25px;">
+# Utilisation
 
-## Enregistrement en CSV
+```bash
+# Cloner ce dépôt
+$ git clone https://github.com/ronanren/Covid19bot
 
-Voici les données enregistrées au sein du CSV, si une donnée est à 0, c'est à dire que la donnée n'est pas connu
+# Accéder au dossier
+$ cd Covid19bot
 
-| Date | Total Cases | New Cases | Total Deaths | New Deaths | Total Recovered | Active Cases | Critical | New Recovered | New Active | New Critical | PlaceInWorld | Total tests | New Tests |
-| ---- | ----------- | --------- | ------------ | ---------- | --------------- | ------------ | -------- | ------------- | ---------- | ------------ | ------------ | ----------- | --------- |
+# Installer les dépendances
+$ pip install requirements.txt
 
-
-Fichier csv mis à jour régulièrement : [dataFrance.csv](https://github.com/ronanren/Covid19bot/blob/master/data/dataFrance.csv)
-
-## Message par mail
-
-#### Gestion de connexion pour l'envoi de mail :
-
-- Modifier le fichier `config.example.py` en `config.py` avec vos identifiants gmail (si c'est autre que gmail, changer le serveur SMTP)
-- Format de `config.py` :
-
-```python
+# Modifier config.py
 login = "mail"
 password = "password"
 maildestination = "mail"
 server = "server smtp"
 port = 587
+
+# Lancer le script
+$ python main.py
 ```
 
-#### Les pourcentages :
+# Enregistrement en CSV
 
-Les pourcentages présentent l'évolution des chiffres par rapport aux chiffres de la veille.  
-Par exemple, si il y a 1000 nouveaux guéris hier et 1000 nouveaux guéris aujourd'hui, alors cela donne 100%  
-Une augmentation d'un chiffre par rapport à la veille donne un pourcentage > 100%
+**Voici les données enregistrées au sein du CSV [dataFrance.csv](https://github.com/ronanren/Covid19bot/blob/master/data/dataFrance.csv)**
 
-#### exemple de message reçu par mail :
+### Parsing des données sur [Worldometers.info](https://www.worldometers.info/coronavirus/)
+
+| Date | Total Cases | New Cases | Total Deaths | New Deaths | Total Recovered | Active Cases | Critical | New Recovered | New Active | New Critical | PlaceInWorld | Total tests | New Tests |
+| ---- | ----------- | --------- | ------------ | ---------- | --------------- | ------------ | -------- | ------------- | ---------- | ------------ | ------------ | ----------- | --------- |
+
+
+# Message par mail
+
+**Les pourcentages présentent l'évolution des chiffres par rapport aux chiffres de la veille.**
+
+### exemple de message reçu par mail :
 
 <img src="images/exampleMail.png" width="500">

@@ -215,7 +215,7 @@ while True:
         msg.attach(MIMEText(message))
 
 
-        mailserver = smtplib.SMTP('smtp.gmail.com', 587)
+        mailserver = smtplib.SMTP(config.server, config.port)
         mailserver.ehlo()
         mailserver.starttls()
         mailserver.ehlo()

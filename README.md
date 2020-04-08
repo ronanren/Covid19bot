@@ -10,7 +10,7 @@ Bot utilisé sur le compte twitter : [@FrenchCovid](https://twitter.com/FrenchCo
 
 # Fonctionnalités
 
-- Vérification régulier en intervalle de temps pour vérifier si les nouvelles données sont publiées
+- Vérification régulière en intervalle de temps pour vérifier si les nouvelles données sont publiées
 - Enregistrement des nouvelles données quotidiennes dans un CSV
 - Création de 3 graphiques (statistiques total, statistiques quotidiennes et statistiques mondiales des 5 premiers pays les plus touchés)
 - Création et envoi d'un message par mail des nouvelles statistiques pour tweeter
@@ -38,6 +38,8 @@ Fichier csv mis à jour régulièrement : [dataFrance.csv](https://github.com/ro
 login = "mail"
 password = "password"
 maildestination = "mail"
+server = "server smtp"
+port = 587
 ```
 
 #### Les pourcentages :

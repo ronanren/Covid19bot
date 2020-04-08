@@ -17,14 +17,14 @@
   <a href="#Licence">Licence</a> |
   <a href="#Contactez-moi">Contactez-moi</a> |
   <br>
-  <a href="https://www.ronanren.github.io">Consultez mon site personnel !</a> 
+  <a href="https://ronanren.github.io" target="_blank">Consultez mon site personnel !</a> 
 </p>
 
 <p align="center">
     <img src="images/console.gif" width="400">
 </p>
 
-Bot utilisé sur le compte twitter : [@FrenchCovid](https://twitter.com/FrenchCovid)
+Bot utilisé sur le compte twitter : <a href="https://twitter.com/FrenchCovid" target="_blank">@FrenchCovid</a>
 
 # Fonctionnalités
 
@@ -45,7 +45,7 @@ $ cd Covid19bot
 # Installer les dépendances
 $ pip install requirements.txt
 
-# Modifier config.py
+# Modifier le fichier config.py
 login = "mail"
 password = "password"
 maildestination = "mail"
@@ -58,9 +58,9 @@ $ python main.py
 
 # Enregistrement en CSV
 
-**Voici les données enregistrées au sein du CSV [dataFrance.csv](https://github.com/ronanren/Covid19bot/blob/master/data/dataFrance.csv)**
+**Voici les données enregistrées au sein du CSV <a href="https://github.com/ronanren/Covid19bot/blob/master/data/dataFrance.csv" target="_blank">dataFrance.csv</a>**
 
-### Parsing des données sur [Worldometers.info](https://www.worldometers.info/coronavirus/)
+### Parsing des données sur <a href="https://www.worldometers.info/coronavirus/" target="_blank">Worldometers.info</a>
 
 | Date | Total Cases | New Cases | Total Deaths | New Deaths | Total Recovered | Active Cases | Critical | New Recovered | New Active | New Critical | PlaceInWorld | Total tests | New Tests |
 | ---- | ----------- | --------- | ------------ | ---------- | --------------- | ------------ | -------- | ------------- | ---------- | ------------ | ------------ | ----------- | --------- |
@@ -80,4 +80,4 @@ MIT
 
 # Contactez-moi
 
-**Twitter** : [@Ronanren](https://twitter.com/Ronanren)
+**Twitter** : <a href="https://twitter.com/Ronanren" target="_blank">@Ronanren</a>

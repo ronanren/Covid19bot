@@ -43,7 +43,7 @@ $ git clone https://github.com/ronanren/Covid19bot
 $ cd Covid19bot
 
 # Installer les dépendances
-$ pip install requirements.txt
+$ pip install -r requirements.txt
 
 # Modifier le fichier config.py
 login = "mail"

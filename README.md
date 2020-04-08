@@ -17,7 +17,7 @@
   <a href="#Licence">Licence</a> |
   <a href="#Contactez-moi">Contactez-moi</a> |
   <br>
-  <a href="https://ronanren.github.io" target="_blank">Consultez mon site personnel !</a> 
+  <a href="https://ronanren.github.io" target="_blank">Mon site personnel</a> 
 </p>
 
 <p align="center">
@@ -28,7 +28,7 @@ Bot utilisé sur le compte twitter : <a href="https://twitter.com/FrenchCovid" t
 
 # Fonctionnalités
 
-- Vérification régulière en intervalle de temps pour vérifier si les nouvelles données sont publiées
+- Vérification régulière pour vérifier si les nouvelles données du jour sont publiées
 - Enregistrement des nouvelles données quotidiennes dans un CSV
 - Création de 3 graphiques (statistiques total, statistiques quotidiennes et statistiques mondiales des 5 premiers pays les plus touchés)
 - Création et envoi d'un message par mail des nouvelles statistiques pour tweeter
@@ -68,11 +68,13 @@ $ python main.py
 
 # Message par mail
 
-**Les pourcentages présentent l'évolution des chiffres par rapport aux chiffres de la veille.**
+**Les pourcentages présentent l'évolution des données par rapport aux données de la veille.**
 
 ### exemple de message reçu par mail :
 
-<img src="images/exampleMail.png" width="500">
+<p align="center">
+  <img src="images/exampleMail.png" width="500">
+</p>
 
 # Licence
 

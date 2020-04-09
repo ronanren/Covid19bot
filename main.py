@@ -45,12 +45,16 @@ def makeTabOfData():
                 tabActiveCases.append(int(row[6].replace(".", "")))
                 tabCritical.append(int(row[7].replace(".", "")))
                 tabNewRecovered.append(int(row[8].replace(".", "")))
-                tabNewActive.append(int(row[9].replace(".", "")))
-                tabNewCritical.append(int(row[10].replace(".", "")))
+                if (int(row[9].replace(".", "")) < 0):
+                    tabNewActive.append(0)
+                else:
+                    tabNewActive.append(int(row[9].replace(".", "")))
+                if (int(row[10].replace(".", "")) < 0):
+                    tabNewCritical.append(0)
+                else:
+                    tabNewCritical.append(int(row[10].replace(".", "")))
                 tabDate.append(line_count)
-                line_count += 1
-            else:
-                line_count += 1
+            line_count += 1
 
 
 def makeGraph():
@@ -200,13 +204,17 @@ while True:
 
         # Send message to tweet
         msg = MIMEMultipart()
-        msg['From'] = 'mail@gmail.com'
-        msg['To'] = 'mail@gmail.com'
         msg['Subject'] = 'Data bot'
         ligne1 = "La 🇫🇷 est " + str(PlaceInWorld) + "ème au 🌎\n"
         ligne2 = "🟢 " + cases[4].replace(".", ",") + " guéris +" + str(newRecovered) + " [" + str(newRecoveredPercent) + "%]\n"
-        ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + str(newActive) + " [" + str(newActivePercent) + "%]\n"
-        ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
+        if (newActive < 0):
+            ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades " + str(newActive) + " [" + str(newActivePercent) + "%]\n"
+        else:
+            ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + str(newActive) + " [" + str(newActivePercent) + "%]\n"
+        if (newCritical < 0):
+            ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves " + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
+        else:
+            ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
         ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(".", "") + " [" + str(newDeathPercent) + "%]\n"
         ligne6 = "💉 " + cases[9].replace(".", ",") + " tests +" + str(newTests) + "\n\n"
         ligne7 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")

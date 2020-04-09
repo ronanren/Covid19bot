@@ -14,6 +14,7 @@
   <a href="#Utilisation">Utilisation</a> |
   <a href="#Enregistrement-en-CSV">Enregistrement en CSV</a> |
   <a href="#Message-par-mail">Message par mail</a> |
+  <a href="#Graphique-générés-autmatiquement">Graphique</a> |
   <a href="#Licence">Licence</a> |
   <a href="#Contactez-moi">Contactez-moi</a> |
   <br>
@@ -70,10 +71,18 @@ $ python main.py
 
 **Les pourcentages présentent l'évolution des données par rapport aux données de la veille.**
 
-### exemple de message reçu par mail :
+### Exemple de message reçu par mail :
 
 <p align="center">
   <img src="images/exampleMail.png" width="500">
+</p>
+
+# Graphiques générés automatiquement
+
+<p align="center">
+  <img src="data/2020-04-08_1.png" width="48%">
+  <img src="data/2020-04-08_2.png" width="48%">
+  <img src="data/2020-04-08_3.png" width="50%">
 </p>
 
 # Licence

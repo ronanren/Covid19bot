@@ -14,7 +14,7 @@
   <a href="#Utilisation">Utilisation</a> |
   <a href="#Enregistrement-en-CSV">Enregistrement en CSV</a> |
   <a href="#Message-par-mail">Message par mail</a> |
-  <a href="#Graphique-générés-autmatiquement">Graphique</a> |
+  <a href="#graphiques-générés-automatiquement">Graphique</a> |
   <a href="#Licence">Licence</a> |
   <a href="#Contactez-moi">Contactez-moi</a> |
   <br>

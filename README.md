@@ -15,9 +15,10 @@
   <a href="#Enregistrement-en-CSV">Enregistrement en CSV</a> |
   <a href="#Message-par-mail">Message par mail</a> |
   <a href="#graphiques-générés-automatiquement">Graphique</a> |
+  <a href="#Animation">Animation</a> |
   <a href="#Licence">Licence</a> |
-  <a href="#Contactez-moi">Contactez-moi</a> |
   <br>
+  <a href="#Contactez-moi">Contactez-moi</a> | 
   <a href="https://ronanren.github.io" target="_blank">Mon site personnel</a> 
 </p>
 
@@ -83,6 +84,15 @@ $ python main.py
   <img src="data/2020-04-11/2020-04-11_1.png" width="48%">
   <img src="data/2020-04-11/2020-04-11_2.png" width="48%">
   <img src="data/2020-04-11/2020-04-11_3.png" width="50%">
+</p>
+
+# Animation
+
+**Le script _createAnimation.py_ permet de créer un gif pour montrer l'évolution du graphe 1 et du graphe 2**
+
+<p align="center">
+  <img src="data/2020-04-11/animation_2020-04-11_graph1.gif" width="48%">
+  <img src="data/2020-04-11/animation_2020-04-11_graph3.gif" width="48%">
 </p>
 
 # Licence

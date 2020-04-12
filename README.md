@@ -57,6 +57,9 @@ port = 587
 
 # Lancer le script
 $ python main.py
+
+# Générer les graphiques
+$ python createAnimation.py
 ```
 
 # Enregistrement en CSV

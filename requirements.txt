@@ -1,3 +1,4 @@
 requests>=2.22.0
 matplotlib>=2.2.5
 halo>=0.0.29
+imageio>=2.8.0

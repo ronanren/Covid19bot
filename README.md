@@ -6,7 +6,6 @@
 <a href="https://badge.fury.io/py/requests"><img src="https://badge.fury.io/py/requests.svg" alt="PyPI version" height="18"></a>
   <a href="https://badge.fury.io/py/matplotlib"><img src="https://badge.fury.io/py/matplotlib.svg" alt="PyPI version" height="18"></a>
   <a href="https://badge.fury.io/py/halo"><img src="https://badge.fury.io/py/halo.svg" alt="PyPI version" height="18"></a>
-  <a href="https://badge.fury.io/py/csv"><img src="https://badge.fury.io/py/csv.svg" alt="PyPI version" height="18"></a>
   <a href="https://badge.fury.io/py/imageio"><img src="https://badge.fury.io/py/imageio.svg" alt="PyPI version" height="18"></a>
 </p>
 

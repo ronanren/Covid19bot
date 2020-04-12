@@ -80,9 +80,9 @@ $ python main.py
 # Graphiques générés automatiquement
 
 <p align="center">
-  <img src="data/2020-04-08_1.png" width="48%">
-  <img src="data/2020-04-08_2.png" width="48%">
-  <img src="data/2020-04-08_3.png" width="50%">
+  <img src="data/2020-04-11/2020-04-11_1.png" width="48%">
+  <img src="data/2020-04-11/2020-04-11_2.png" width="48%">
+  <img src="data/2020-04-11/2020-04-11_3.png" width="50%">
 </p>
 
 # Licence

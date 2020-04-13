@@ -11,7 +11,7 @@ images = []
 for i in datelist:
     images.append(imageio.imread("data/" + i + "/" + i + "_1.png"))
 
-imageio.mimsave("data/" + datelist[-1] + "/animation_" +
+imageio.mimsave("data/animation/animation_" +
                 datelist[-1] + "_graph1" + ".gif", images)
 
 # animation of graph 3
@@ -24,5 +24,5 @@ images = []
 for i in datelist:
     images.append(imageio.imread("data/" + i + "/" + i + "_3.png"))
 
-imageio.mimsave("data/" + datelist[-1] + "/animation_" +
+imageio.mimsave("data/animation/animation_" +
                 datelist[-1] + "_graph3" + ".gif", images)

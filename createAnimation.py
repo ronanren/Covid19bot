@@ -2,7 +2,7 @@ import imageio
 import datetime
 
 # animation of graph 1
-numberOfDay = (datetime.date.today()-datetime.date(2020, 4, 1)).days
+numberOfDay = (datetime.date.today()-datetime.date(2020, 3, 18)).days
 datelist = [(datetime.date.today() - datetime.timedelta(days=x)
              ).strftime('%Y-%m-%d') for x in range(1, numberOfDay + 1)][::-1]
 

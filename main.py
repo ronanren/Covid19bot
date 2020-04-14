@@ -177,6 +177,21 @@ while True:
 
     verif = False
 
+    # Changer les données manuellements si il y a des erreurs au niveau de la source
+    # cases[0] = 0 # Cas totaux
+    # cases[1] = 0 # nouveaux cas
+    # cases[2] = 0 # morts totaux
+    # cases[3] = 0 # nouveaux morts
+    # cases[4] = 0 # guéris totaux
+    # cases[5] = 0 # malades 
+    # cases[6] = 0 # cas critique/en réanimation
+    # cases[7] = 0 # nouveaux guéris
+    # cases[8] = 0 # nouveaux malades
+    # cases[9] = 0 # nouveaux critique/en réanimation
+    # cases[10] = 0 # place dans le monde
+    # cases[11] = 0 # tests totaux
+    # cases[12] = 0 # nouveaux tests
+
     # Retrouver les données d'hier
     f1 = open("data/dataFrance.csv", "r")
     last_line = f1.readlines()[-1].split(',')

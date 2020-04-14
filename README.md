@@ -64,13 +64,28 @@ $ python createAnimation.py
 
 # Enregistrement en CSV
 
-**Voici les données enregistrées au sein du CSV <a href="https://github.com/ronanren/Covid19bot/blob/master/data/dataFrance.csv" target="_blank">dataFrance.csv</a>**
+**Les données sont enregistrées au sein du CSV <a href="https://github.com/ronanren/Covid19bot/blob/master/data/dataFrance.csv" target="_blank">_dataFrance.csv_</a>**
 
 ### Parsing des données sur <a href="https://www.worldometers.info/coronavirus/" target="_blank">Worldometers.info</a>
 
-| Date | Total Cases | New Cases | Total Deaths | New Deaths | Total Recovered | Active Cases | Critical | New Recovered | New Active | New Critical | PlaceInWorld | Total tests | New Tests |
+| Date | Total Cases | New Cases | Total Deaths | New Deaths | Total Recovered | Active Cases | Critical | New Recovered | New Active | New Critical | PlaceInWorld | Total Tests | New Tests |
 | ---- | ----------- | --------- | ------------ | ---------- | --------------- | ------------ | -------- | ------------- | ---------- | ------------ | ------------ | ----------- | --------- |
 
+
+- **Date du jour:** 'Date' sous la forme 'année-mois-jour'
+- **Cas totaux:** 'Total Cases'
+- **Nouveaux cas:** 'New Cases'
+- **Morts totaux:** 'Total Deaths'
+- **Nouveaux morts:** 'New Deaths'
+- **Total des guéris:** 'Total Recovered'
+- **Cas actuellement malades:** 'Active Cases'
+- **Cas critique/en réanimation:** 'Critical'
+- **Nouveaux guéris:** 'New Recovered'
+- **Nouveaux malades:** 'New Active'
+- **Nouveaux critique/en réanimation:** 'New Critical'
+- **Place dans le monde:** 'PlaceInWorld'
+- **Total des tests réalisés:** 'Total Tests'
+- **Nouveaux tests réalisés:** 'New Tests'
 
 # Message par mail
 

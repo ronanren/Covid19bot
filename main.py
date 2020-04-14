@@ -16,7 +16,7 @@ import config
 
 # Mettre les dates en francais
 locale.setlocale(locale.LC_TIME, '')
-spinner = Halo(text='Scrapping data', spinner='dots', color='cyan')
+spinner = Halo(text='Scrapping des données', spinner='dots', color='cyan')
 spinner.start()
 
 
@@ -159,8 +159,8 @@ def makeGraph():
 while True:
 
     spinner.color = 'cyan'
-    spinner.text = 'Scrapping data'
-    # Parsing de données sur worldometers.info
+    spinner.text = 'Scrapping des données'
+    # Parsing des données sur worldometers.info
     p = requests.get('https://www.worldometers.info/coronavirus/')
 
     indexFrance = p.text.find(
@@ -202,10 +202,10 @@ while True:
             verif = True
         else:
             spinner.color = 'magenta'
-            spinner.text = 'Data already published ' + \
+            spinner.text = 'Données déjà publiées' + \
                 time.strftime("%H:%M:%S")
     except:
-        spinner.text = 'Data not yet published ' + time.strftime("%H:%M:%S")
+        spinner.text = 'Données pas encore publiées ' + time.strftime("%H:%M:%S")
 
     if (verif):
 
@@ -278,6 +278,6 @@ while True:
         mailserver.login(maillogin, mailpassword)
         mailserver.sendmail(maillogin, maildestination, msg.as_string())
         mailserver.quit()
-        spinner.succeed('Data sent ' + time.strftime("%H:%M:%S"))
+        spinner.succeed('Données envoyés' + time.strftime("%H:%M:%S"))
         spinner.start()
     time.sleep(30)

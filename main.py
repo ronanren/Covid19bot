@@ -202,7 +202,7 @@ while True:
             verif = True
         else:
             spinner.color = 'magenta'
-            spinner.text = 'Données déjà publiées' + \
+            spinner.text = 'Données déjà publiées ' + \
                 time.strftime("%H:%M:%S")
     except:
         spinner.text = 'Données pas encore publiées ' + time.strftime("%H:%M:%S")
@@ -278,6 +278,6 @@ while True:
         mailserver.login(maillogin, mailpassword)
         mailserver.sendmail(maillogin, maildestination, msg.as_string())
         mailserver.quit()
-        spinner.succeed('Données envoyés' + time.strftime("%H:%M:%S"))
+        spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
         spinner.start()
     time.sleep(30)

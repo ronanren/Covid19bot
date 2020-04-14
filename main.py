@@ -14,7 +14,7 @@ from email.mime.text import MIMEText
 from halo import Halo
 import config
 
-# Put the dates in french
+# Mettre les dates en francais
 locale.setlocale(locale.LC_TIME, '')
 spinner = Halo(text='Scrapping data', spinner='dots', color='cyan')
 spinner.start()
@@ -61,7 +61,7 @@ def makeTabOfData():
 def makeGraph():
 
     os.mkdir("data/" + str(date.today()))
-    # Graph 1
+    # Graphe 1
     plt.plot(tabDate, tabTotalCases, "o-",
              label="Population touchée", linewidth=3, color="#9b59b6")
     plt.plot(tabDate, tabActiveCases, "o-",
@@ -84,7 +84,7 @@ def makeGraph():
     plt.savefig('data/' + str(date.today()) +
                 "/" + str(date.today()) + '_1.png')
     plt.clf()
-    # Graph 2
+    # Graphe 2
     plt.plot(tabDate[1:], tabNewCases[1:], "o-",
              label="Population touchée chaque jour", linewidth=3, color="#9b59b6")
     plt.plot(tabDate[1:], tabNewActive[1:], "o-",
@@ -109,7 +109,7 @@ def makeGraph():
                 "/" + str(date.today()) + '_2.png')
     plt.clf()
 
-    # Graph 3
+    # Graphe 3
     index = p.text.find('id="main_table_countries_today"')
     indexEnd = index + p.text[index:].find("</table>")
 
@@ -142,11 +142,9 @@ def makeGraph():
 
     bar1 = plt.barh(year, deaths, color="#2c3e50",
                     label="Population décédée", height=0.8)
-    # careful: notice "bottom" parameter became "left"
     bar2 = plt.barh(year, totalcases, left=deaths,
                     color="#9b59b6", label="Population malade", height=0.8)
 
-    # we also need to switch the labels
     plt.xlabel('Nombre total de malade et décès')
     plt.ylabel('Pays')
 
@@ -162,7 +160,7 @@ while True:
 
     spinner.color = 'cyan'
     spinner.text = 'Scrapping data'
-    # Parse data on worldometers.info
+    # Parsing de données sur worldometers.info
     p = requests.get('https://www.worldometers.info/coronavirus/')
 
     indexFrance = p.text.find(
@@ -179,12 +177,12 @@ while True:
 
     verif = False
 
-    # retrieve yesterday's data
+    # Retrouver les données d'hier
     f1 = open("data/dataFrance.csv", "r")
     last_line = f1.readlines()[-1].split(',')
     f1.close()
     try:
-        # Checking that all data is up to date
+        # Vérifier si toutes les données sont publiées
         if (last_line[0] != str(date.today()) and cases[10] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
             verif = True
         else:
@@ -205,7 +203,7 @@ while True:
         newTests = int(cases[9].replace(".", "")) - \
             int(last_line[12].replace(".", ""))
 
-        # percentage of new cases compared to yesterday's case
+        # Pourcentage des nouveaux cas comparés au cas d'hier
         newRecoveredPercent = round(
             100 * (int(newRecovered)/int(last_line[8].replace(".", ""))), 2)
         newActivePercent = round(
@@ -215,7 +213,7 @@ while True:
         newDeathPercent = round(
             100 * (int(cases[3].replace(".", ""))/int(last_line[4].replace(".", ""))), 2)
 
-        # Save data in csv file
+        # Enregistrer les données dans le CSV
         f = open("data/dataFrance.csv", "a+")
         f.write(str(date.today()) + "," + cases[0] + "," + cases[1] +
                 "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[5] + "," + cases[6] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[9] + "," + str(newTests) + "\n")
@@ -224,7 +222,7 @@ while True:
         makeTabOfData()
         makeGraph()
 
-        # Send message to tweet
+        # Envoyer le message pour le tweeter
         msg = MIMEMultipart()
         msg['Subject'] = 'Data bot'
         ligne1 = "La 🇫🇷 est " + str(PlaceInWorld) + "ème au 🌎\n"

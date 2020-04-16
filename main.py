@@ -196,6 +196,12 @@ while True:
         newCriticalPercent = round(100 * (int(newCritical)/int(last_line[10].replace(".", ""))), 2)
         newDeathPercent = round(100 * (int(cases[3].replace(".", ""))/int(last_line[4].replace(".", ""))), 2)
 
+        # Enregistrer les données dans le CSV
+        f = open("data/dataFrance.csv", "a+")
+        f.write(str(date.today()) + "," + cases[0] + "," + cases[1] +
+                "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[5] + "," + cases[6] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[9] + "," + str(newTests) + "\n")
+        f.close()
+
         makeTabOfData()
         makeGraph()
 
@@ -210,7 +216,6 @@ while True:
             ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves " + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
         else:
             ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
-
         ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(".", "") + " [" + str(newDeathPercent) + "%]\n"
         if (newTests > 0):
             ligne6 = "💉 " + cases[9].replace(".", ",") + " tests +" + str(newTests) + "\n\n"
@@ -229,30 +234,16 @@ while True:
         auth.set_access_token(access_token, access_token_secret)
          
         api = tweepy.API(auth)
-
-        print (message)
-        print ("Données valide ? O/N ")
-        inputVerif = input()
-        if (inputVerif == "O"):
-            # Enregistrer les données dans le CSV
-            f = open("data/dataFrance.csv", "a+")
-            f.write(str(date.today()) + "," + cases[0] + "," + cases[1] +
-                    "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[5] + "," + cases[6] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[9] + "," + str(newTests) + "\n")
-            f.close()
-            api.update_status(message)
-            lastIdTweet = api.user_timeline(count = 1)[0].id
-
-            image1 = "data/" + str(date.today()) + "/" + str(date.today()) + "_1.png"
-            image2 = "data/" + str(date.today()) + "/" + str(date.today()) + "_2.png"
-            image3 = "data/" + str(date.today()) + "/" + str(date.today()) + "_3.png"
-            images = (image1, image2, image3)
-            media_ids = [api.media_upload(i).media_id_string for i in images]
-            api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id = lastIdTweet)
-            spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
-            spinner.start()
-        else:
-            shutil.rmtree("data/" + str(date.today()) + "/")
-            spinner.text = 'Données erronées ' + time.strftime("%H:%M:%S")
         
-        
+        api.update_status(message)
+        lastIdTweet = api.user_timeline(count = 1)[0].id
+
+        image1 = "data/" + str(date.today()) + "/" + str(date.today()) + "_1.png"
+        image2 = "data/" + str(date.today()) + "/" + str(date.today()) + "_2.png"
+        image3 = "data/" + str(date.today()) + "/" + str(date.today()) + "_3.png"
+        images = (image1, image2, image3)
+        media_ids = [api.media_upload(i).media_id_string for i in images]
+        api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id = lastIdTweet)
+        spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
+        spinner.start()
     time.sleep(30)

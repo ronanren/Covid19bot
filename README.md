@@ -6,6 +6,7 @@
 <a href="https://badge.fury.io/py/requests"><img src="https://badge.fury.io/py/requests.svg" alt="PyPI version" height="18"></a>
   <a href="https://badge.fury.io/py/matplotlib"><img src="https://badge.fury.io/py/matplotlib.svg" alt="PyPI version" height="18"></a>
   <a href="https://badge.fury.io/py/halo"><img src="https://badge.fury.io/py/halo.svg" alt="PyPI version" height="18"></a>
+  <a href="https://badge.fury.io/py/tweepy"><img src="https://badge.fury.io/py/tweepy.svg" alt="PyPI version" height="18"></a>
   <a href="https://badge.fury.io/py/imageio"><img src="https://badge.fury.io/py/imageio.svg" alt="PyPI version" height="18"></a>
 </p>
 
@@ -13,7 +14,7 @@
   <a href="#Fonctionnalités">Fonctionnalités</a> |
   <a href="#Utilisation">Utilisation</a> |
   <a href="#Enregistrement-en-CSV">Enregistrement en CSV</a> |
-  <a href="#Message-par-mail">Message par mail</a> |
+  <a href="#Tweet">Tweet</a> |
   <a href="#graphiques-générés-automatiquement">Graphique</a> |
   <a href="#Animation">Animation</a> |
   <a href="#Licence">Licence</a> |
@@ -34,7 +35,7 @@ Bot utilisé sur le compte twitter : <a href="https://twitter.com/FrenchCovid" t
 - Enregistrement des nouvelles données quotidiennes dans un CSV
 - Création de 3 graphiques (statistiques total, statistiques quotidiennes et statistiques mondiales des 5 premiers pays les plus touchés)
 - Générer une animation des différents graphiques
-- Création et envoi d'un message par mail des nouvelles statistiques pour tweeter
+- Création et envoi de 2 tweets (les données du jour et les différents graphiques)
 
 # Utilisation
 
@@ -48,12 +49,11 @@ $ cd Covid19bot
 # Installer les dépendances
 $ pip install -r requirements.txt
 
-# Modifier le fichier config.py
-login = "mail"
-password = "password"
-maildestination = "mail"
-server = "server smtp"
-port = 587
+# Modifier le fichier config.py pour tweeter
+consumer_key = "consumer_key"
+consumer_secret = "consumer_secret"
+access_token = "access_token"
+access_token_secret = "access_token_secret"
 
 # Lancer le script
 $ python main.py
@@ -87,14 +87,15 @@ $ python createAnimation.py
 - **Total des tests réalisés:** 'Total Tests'
 - **Nouveaux tests réalisés:** 'New Tests'
 
-# Message par mail
+# Tweet
 
 **Les pourcentages présentent l'évolution des données par rapport aux données de la veille.**
 
-### Exemple de message reçu par mail :
+### Exemple des tweets quotidien :
 
 <p align="center">
-  <img src="images/exampleMail.png" width="500">
+  <img src="images/exampleTweet1.png" width="48%">
+  <img src="images/exampleTweet2.png" width="48.8%">
 </p>
 
 # Graphiques générés automatiquement

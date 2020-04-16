@@ -1,5 +1,4 @@
-login = "mail"
-password = "password"
-maildestination = "mail"
-server = "server smtp"
-port = 587
+consumer_key = "consumer_key"
+consumer_secret = "consumer_secret"
+access_token = "access_token"
+access_token_secret = "access_token_secret"

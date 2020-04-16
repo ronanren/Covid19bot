@@ -91,11 +91,11 @@ $ python createAnimation.py
 
 **Les pourcentages présentent l'évolution des données par rapport aux données de la veille.**
 
-### Exemple des tweets quotidien :
+### Exemple des tweets quotidiens :
 
 <p align="center">
   <img src="images/exampleTweet1.png" width="48%">
-  <img src="images/exampleTweet2.png" width="48.75%">
+  <img src="images/exampleTweet2.png" width="48.70%">
 </p>
 
 # Graphiques générés automatiquement

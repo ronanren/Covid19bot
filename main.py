@@ -8,10 +8,8 @@ import csv
 import os
 import time
 import locale
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 from halo import Halo
+import tweepy
 import config
 
 # Mettre les dates en francais
@@ -62,16 +60,11 @@ def makeGraph():
 
     os.mkdir("data/" + str(date.today()))
     # Graphe 1
-    plt.plot(tabDate, tabTotalCases, "o-",
-             label="Population touchée", linewidth=3, color="#9b59b6")
-    plt.plot(tabDate, tabActiveCases, "o-",
-             label="Population malade", linewidth=3, color="#f1c40f")
-    plt.plot(tabDate, tabTotalRecovered, "o-",
-             label="Population guérie", linewidth=3, color="#2ecc71")
-    plt.plot(tabDate, tabCritical, "o-",
-             label="Population critique", linewidth=3, color="#e74c3c")
-    plt.plot(tabDate, tabTotalDeaths, "o-",
-             label="Population décédée", linewidth=3, color="#2c3e50")
+    plt.plot(tabDate, tabTotalCases, "o-", label="Population touchée", linewidth=3, color="#9b59b6")
+    plt.plot(tabDate, tabActiveCases, "o-", label="Population malade", linewidth=3, color="#f1c40f")
+    plt.plot(tabDate, tabTotalRecovered, "o-", label="Population guérie", linewidth=3, color="#2ecc71")
+    plt.plot(tabDate, tabCritical, "o-", label="Population critique", linewidth=3, color="#e74c3c")
+    plt.plot(tabDate, tabTotalDeaths, "o-", label="Population décédée", linewidth=3, color="#2c3e50")
 
     plt.axis([0, numberOfDay + 1, 0, ceil(
         (int(cases[0].replace(".", ""))/5000))*5000 + 5000])
@@ -79,52 +72,38 @@ def makeGraph():
     plt.grid(True)
     plt.xlabel('Jours à partir du 17 mars 2020')
     plt.ylabel('Population')
-    plt.title('Avancé du COVID-19 en France du ' +
-              str(date.today().strftime("%A %d %B %Y")))
-    plt.savefig('data/' + str(date.today()) +
-                "/" + str(date.today()) + '_1.png')
+    plt.title('Avancé du COVID-19 en France du ' + str(date.today().strftime("%A %d %B %Y")))
+    plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_1.png')
     plt.clf()
     # Graphe 2
-    plt.plot(tabDate[1:], tabNewCases[1:], "o-",
-             label="Population touchée chaque jour", linewidth=3, color="#9b59b6")
-    plt.plot(tabDate[1:], tabNewActive[1:], "o-",
-             label="Population malade chaque jour", linewidth=3, color="#f1c40f")
-    plt.plot(tabDate[1:], tabNewRecovered[1:], "o-",
-             label="Population guérie chaque jour", linewidth=3, color="#2ecc71")
-    plt.plot(tabDate[1:], tabNewCritical[1:], "o-",
-             label="Population critique chaque jour", linewidth=3, color="#e74c3c")
-    plt.plot(tabDate[1:], tabNewDeaths[1:], "o-",
-             label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
+    plt.plot(tabDate[1:], tabNewCases[1:], "o-", label="Population touchée chaque jour", linewidth=3, color="#9b59b6")
+    plt.plot(tabDate[1:], tabNewActive[1:], "o-", label="Population malade chaque jour", linewidth=3, color="#f1c40f")
+    plt.plot(tabDate[1:], tabNewRecovered[1:], "o-", label="Population guérie chaque jour", linewidth=3, color="#2ecc71")
+    plt.plot(tabDate[1:], tabNewCritical[1:], "o-", label="Population critique chaque jour", linewidth=3, color="#e74c3c")
+    plt.plot(tabDate[1:], tabNewDeaths[1:], "o-", label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
 
-    plt.axis([0, numberOfDay + 1, 0, ceil(max(tabNewCases + tabNewActive +
-                                              tabNewRecovered + tabNewCritical + tabNewDeaths)/1000)*1000 + 1000])
+    plt.axis([0, numberOfDay + 1, 0, ceil(max(tabNewCases + tabNewActive + tabNewRecovered + tabNewCritical + tabNewDeaths)/1000)*1000 + 1000])
 
     plt.legend(loc='upper left')
     plt.grid(True)
     plt.xlabel('Jours à partir du 18 mars 2020')
     plt.ylabel('Population')
-    plt.title('Avancé du COVID-19 en France du ' +
-              str(date.today().strftime("%A %d %B %Y")))
-    plt.savefig('data/' + str(date.today()) +
-                "/" + str(date.today()) + '_2.png')
+    plt.title('Avancé du COVID-19 en France du ' + str(date.today().strftime("%A %d %B %Y")))
+    plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_2.png')
     plt.clf()
 
     # Graphe 3
     index = p.text.find('id="main_table_countries_today"')
     indexEnd = index + p.text[index:].find("</table>")
 
-    countries = re.findall(
-        r'(?<=<a class="mt_a" href="country\/)(.*)(?=\/">)', str(p.text[index:indexEnd]))
+    countries = re.findall(r'(?<=<a class="mt_a" href="country\/)(.*)(?=\/">)', str(p.text[index:indexEnd]))
     countries = [country.upper() for country in countries][:5]
-    totalcases = re.findall(
-        r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){50})', str(p.text[index:indexEnd]))
+    totalcases = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){50})', str(p.text[index:indexEnd]))
 
     totalCasesCountries = []
-    totalCasesCountries = (re.findall(
-        r"[\d]{1,5},[\d]{3}", str(totalcases)))[:5]
+    totalCasesCountries = (re.findall(r"[\d]{1,5},[\d]{3}", str(totalcases)))[:5]
 
-    totaldeaths = re.findall(
-        r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){180})', str(p.text[index:indexEnd]))
+    totaldeaths = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){180})', str(p.text[index:indexEnd]))
     totalDeathsCountries = []
 
     for x in range(0, 5):
@@ -140,19 +119,15 @@ def makeGraph():
 
     totalcases = [totalcases[i]-deaths[i] for i in range(5)]
 
-    bar1 = plt.barh(year, deaths, color="#2c3e50",
-                    label="Population décédée", height=0.8)
-    bar2 = plt.barh(year, totalcases, left=deaths,
-                    color="#9b59b6", label="Population malade", height=0.8)
+    bar1 = plt.barh(year, deaths, color="#2c3e50", label="Population décédée", height=0.8)
+    bar2 = plt.barh(year, totalcases, left=deaths, color="#9b59b6", label="Population malade", height=0.8)
 
     plt.xlabel('Nombre total de malade et décès')
     plt.ylabel('Pays')
 
     plt.legend(loc='lower right')
-    plt.title('Avancé du COVID-19 dans le monde du ' +
-              str(date.today().strftime("%A %d %B %Y")))
-    plt.savefig('data/' + str(date.today()) +
-                "/" + str(date.today()) + '_3.png')
+    plt.title('Avancé du COVID-19 dans le monde du ' + str(date.today().strftime("%A %d %B %Y")))
+    plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_3.png')
     plt.clf()
 
 
@@ -209,75 +184,73 @@ while True:
 
     if (verif):
 
-        newRecovered = int(cases[4].replace(".", "")) - \
-            int(last_line[5].replace(".", ""))
-        newCritical = int(cases[6].replace(".", "")) - \
-            int(last_line[7].replace(".", ""))
-        newActive = int(cases[5].replace(".", "")) - \
-            int(last_line[6].replace(".", ""))
-        newTests = int(cases[9].replace(".", "")) - \
-            int(last_line[12].replace(".", ""))
+        newRecovered = int(cases[4].replace(".", "")) - int(last_line[5].replace(".", ""))
+        newCritical = int(cases[6].replace(".", "")) - int(last_line[7].replace(".", ""))
+        newActive = int(cases[5].replace(".", "")) - int(last_line[6].replace(".", ""))
+        newTests = int(cases[9].replace(".", "")) - int(last_line[12].replace(".", ""))
 
         # Pourcentage des nouveaux cas comparés au cas d'hier
-        newRecoveredPercent = round(
-            100 * (int(newRecovered)/int(last_line[8].replace(".", ""))), 2)
-        newActivePercent = round(
-            100 * (int(newActive)/int(last_line[9].replace(".", ""))), 2)
-        newCriticalPercent = round(
-            100 * (int(newCritical)/int(last_line[10].replace(".", ""))), 2)
-        newDeathPercent = round(
-            100 * (int(cases[3].replace(".", ""))/int(last_line[4].replace(".", ""))), 2)
-
-        # Enregistrer les données dans le CSV
-        f = open("data/dataFrance.csv", "a+")
-        f.write(str(date.today()) + "," + cases[0] + "," + cases[1] +
-                "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[5] + "," + cases[6] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[9] + "," + str(newTests) + "\n")
-        f.close()
+        newRecoveredPercent = round(100 * (int(newRecovered)/int(last_line[8].replace(".", ""))), 2)
+        newActivePercent = round(100 * (int(newActive)/int(last_line[9].replace(".", ""))), 2)
+        newCriticalPercent = round(100 * (int(newCritical)/int(last_line[10].replace(".", ""))), 2)
+        newDeathPercent = round(100 * (int(cases[3].replace(".", ""))/int(last_line[4].replace(".", ""))), 2)
 
         makeTabOfData()
         makeGraph()
 
-        # Envoyer le message pour le tweeter
-        msg = MIMEMultipart()
-        msg['Subject'] = 'Data bot'
+        # Message à tweeter
         ligne1 = "La 🇫🇷 est " + str(PlaceInWorld) + "ème au 🌎\n"
-        ligne2 = "🟢 " + cases[4].replace(".", ",") + " guéris +" + str(
-            newRecovered) + " [" + str(newRecoveredPercent) + "%]\n"
+        ligne2 = "🟢 " + cases[4].replace(".", ",") + " guéris +" + str(newRecovered) + " [" + str(newRecoveredPercent) + "%]\n"
         if (newActive < 0):
-            ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades " + str(
-                newActive) + " [" + str(newActivePercent) + "%]\n"
+            ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades " + str(newActive) + " [" + str(newActivePercent) + "%]\n"
         else:
-            ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + str(
-                newActive) + " [" + str(newActivePercent) + "%]\n"
+            ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + str(newActive) + " [" + str(newActivePercent) + "%]\n"
         if (newCritical < 0):
-            ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves " + str(
-                newCritical) + " [" + str(newCriticalPercent) + "%]\n"
+            ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves " + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
         else:
-            ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(
-                newCritical) + " [" + str(newCriticalPercent) + "%]\n"
-        ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(
-            ".", "") + " [" + str(newDeathPercent) + "%]\n"
-        ligne6 = "💉 " + \
-            cases[9].replace(".", ",") + " tests +" + str(newTests) + "\n\n"
-        ligne7 = cases[0].replace(".", ",") + \
-            " cas totaux +" + cases[1].replace(".", "")
+            ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
+
+        ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(".", "") + " [" + str(newDeathPercent) + "%]\n"
+        if (newTests > 0):
+            ligne6 = "💉 " + cases[9].replace(".", ",") + " tests +" + str(newTests) + "\n\n"
+        else:
+            ligne6 = "\n\n"
+        ligne7 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")
         ligne8 = "\n\nGraphiques📈⏬\n#ConfinementJour" + str(numberOfDay)
-        message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + \
-            ligne6 + ligne7 + ligne8 + "\n📈Évolution du #COVID19 en 🇫🇷"
-        msg.attach(MIMEText(message))
+        message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7 + ligne8
+        
+        consumer_key = config.consumer_key
+        consumer_secret = config.consumer_secret
+        access_token = config.access_token
+        access_token_secret = config.access_token_secret
 
-        mailserver = smtplib.SMTP(config.server, config.port)
-        mailserver.ehlo()
-        mailserver.starttls()
-        mailserver.ehlo()
+        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
+         
+        api = tweepy.API(auth)
 
-        maillogin = config.login
-        mailpassword = config.password
-        maildestination = config.maildestination
+        print (message)
+        print ("Données valide ? O/N ")
+        inputVerif = input()
+        if (inputVerif == "O"):
+            # Enregistrer les données dans le CSV
+            f = open("data/dataFrance.csv", "a+")
+            f.write(str(date.today()) + "," + cases[0] + "," + cases[1] +
+                    "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[5] + "," + cases[6] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[9] + "," + str(newTests) + "\n")
+            f.close()
+            api.update_status(message)
+            lastIdTweet = api.user_timeline(count = 1)[0].id
 
-        mailserver.login(maillogin, mailpassword)
-        mailserver.sendmail(maillogin, maildestination, msg.as_string())
-        mailserver.quit()
-        spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
-        spinner.start()
+            image1 = "data/" + str(date.today()) + "/" + str(date.today()) + "_1.png"
+            image2 = "data/" + str(date.today()) + "/" + str(date.today()) + "_2.png"
+            image3 = "data/" + str(date.today()) + "/" + str(date.today()) + "_3.png"
+            images = (image1, image2, image3)
+            media_ids = [api.media_upload(i).media_id_string for i in images]
+            api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id = lastIdTweet)
+            spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
+            spinner.start()
+        else:
+            spinner.text = 'Données erronées ' + time.strftime("%H:%M:%S")
+        
+        
     time.sleep(30)

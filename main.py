@@ -11,6 +11,7 @@ import locale
 from halo import Halo
 import tweepy
 import config
+import shutil
 
 # Mettre les dates en francais
 locale.setlocale(locale.LC_TIME, '')
@@ -250,6 +251,7 @@ while True:
             spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
             spinner.start()
         else:
+            shutil.rmtree("data/" + str(date.today()) + "/")
             spinner.text = 'Données erronées ' + time.strftime("%H:%M:%S")
         
         

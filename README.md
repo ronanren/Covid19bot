@@ -58,7 +58,7 @@ access_token_secret = "access_token_secret"
 # Lancer le script
 $ python main.py
 
-# Générer les graphiques
+# Générer les animations
 $ python createAnimation.py
 ```
 
@@ -95,7 +95,7 @@ $ python createAnimation.py
 
 <p align="center">
   <img src="images/exampleTweet1.png" width="48%">
-  <img src="images/exampleTweet2.png" width="48.8%">
+  <img src="images/exampleTweet2.png" width="48.75%">
 </p>
 
 # Graphiques générés automatiquement

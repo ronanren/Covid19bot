@@ -31,7 +31,7 @@ for i in datelist:
 imageio.mimsave("data/animation/animation_" + datelist[-1] + "_graph2" + ".gif", images, fps = 7.5)
 
 # Animation du graphe 3
-numberOfDay = (datetime.date.today()-datetime.date(2020, 4, 4)).days
+numberOfDay = (datetime.date.today()-datetime.date(2020, 4, 17)).days
 datelist = [(datetime.date.today() - datetime.timedelta(days=x)
              ).strftime('%Y-%m-%d') for x in range(aujd, numberOfDay + 1)][::-1]
 

@@ -101,9 +101,9 @@ $ python createAnimation.py
 # Graphiques générés automatiquement
 
 <p align="center">
-  <img src="data/2020-04-11/2020-04-11_1.png" width="48%">
-  <img src="data/2020-04-11/2020-04-11_2.png" width="48%">
-  <img src="data/2020-04-11/2020-04-11_3.png" width="50%">
+  <img src="data/2020-04-17/2020-04-17_1.png" width="48%">
+  <img src="data/2020-04-17/2020-04-17_2.png" width="48%">
+  <img src="data/2020-04-17/2020-04-17_3.png" width="50%">
 </p>
 
 # Animation
@@ -113,7 +113,6 @@ $ python createAnimation.py
 <p align="center">
   <img src="data/animation/animation_2020-04-16_graph1.gif" width="48%">
   <img src="data/animation/animation_2020-04-16_graph2.gif" width="48%">
-  <img src="data/animation/animation_2020-04-16_graph3.gif" width="50%">
 </p>
 
 # Licence

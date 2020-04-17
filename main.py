@@ -72,7 +72,6 @@ def makeGraph():
     plt.legend(loc='upper left')
     plt.grid(True)
     plt.xlabel('Jours à partir du 17 mars 2020')
-    plt.ylabel('Population')
     plt.title('Avancé du COVID-19 en France du ' + str(date.today().strftime("%A %d %B %Y")))
     plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_1.png')
     plt.clf()
@@ -88,7 +87,6 @@ def makeGraph():
     plt.legend(loc='upper left')
     plt.grid(True)
     plt.xlabel('Jours à partir du 18 mars 2020')
-    plt.ylabel('Population')
     plt.title('Avancé du COVID-19 en France du ' + str(date.today().strftime("%A %d %B %Y")))
     plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_2.png')
     plt.clf()
@@ -107,6 +105,14 @@ def makeGraph():
     totaldeaths = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){180})', str(p.text[index:indexEnd]))
     totalDeathsCountries = []
 
+    totalRecovered = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){380})', str(p.text[index:indexEnd]))
+    totalRecoveredCountries = []
+
+
+    for x in range(0, 5):
+        indexRecovered = str(totalRecovered[x]).find('<td style="font-weight: bold; text-align:right">')
+        totalRecoveredCountries.append(int(re.findall(r"[\d]{1,5},[\d]{3}", str(totalRecovered[x])[indexRecovered+48:indexRecovered+70])[0].replace(",", "")))
+
     for x in range(0, 5):
         totalDeathsCountries.append(int(re.findall(
             r"[\d]{1,5},[\d]{3}", str(totaldeaths[x][0][100:]))[0].replace(",", "")))
@@ -117,18 +123,17 @@ def makeGraph():
     year = countries[::-1]
     totalcases = totalCasesCountries[::-1]
     deaths = totalDeathsCountries[::-1]
+    recovered = totalRecoveredCountries[::-1]
 
     totalcases = [totalcases[i]-deaths[i] for i in range(5)]
 
     bar1 = plt.barh(year, deaths, color="#2c3e50", label="Population décédée", height=0.8)
     bar2 = plt.barh(year, totalcases, left=deaths, color="#9b59b6", label="Population malade", height=0.8)
-
-    plt.xlabel('Nombre total de malade et décès')
-    plt.ylabel('Pays')
+    bar3 = plt.barh(year, recovered, color="#27ae60", label="Population guérie", height=0.4, align='edge')
 
     plt.legend(loc='lower right')
     plt.title('Avancé du COVID-19 dans le monde du ' + str(date.today().strftime("%A %d %B %Y")))
-    plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_3.png')
+    plt.savefig(str(date.today()) + '_3.png')
     plt.clf()
 
 

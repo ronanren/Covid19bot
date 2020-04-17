@@ -75,6 +75,7 @@ def makeGraph():
     plt.title('Avancé du COVID-19 en France du ' + str(date.today().strftime("%A %d %B %Y")))
     plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_1.png')
     plt.clf()
+    
     # Graphe 2
     plt.plot(tabDate[1:], tabNewCases[1:], "o-", label="Population touchée chaque jour", linewidth=3, color="#9b59b6")
     plt.plot(tabDate[1:], tabNewActive[1:], "o-", label="Population malade chaque jour", linewidth=3, color="#f1c40f")

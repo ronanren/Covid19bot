@@ -15,8 +15,8 @@ images = []
 for i in datelist:
     images.append(imageio.imread("data/" + i + "/" + i + "_1.png"))
 
-imageio.mimsave("data/animation/animation_" +
-                datelist[-1] + "_graph1" + ".gif", images)
+
+imageio.mimsave("data/animation/animation_" + datelist[-1] + "_graph1" + ".gif", images, fps = 7.5)
 
 # Animation du graphe 2
 numberOfDay = (datetime.date.today()-datetime.date(2020, 3, 18)).days
@@ -28,8 +28,7 @@ images = []
 for i in datelist:
     images.append(imageio.imread("data/" + i + "/" + i + "_2.png"))
 
-imageio.mimsave("data/animation/animation_" +
-                datelist[-1] + "_graph2" + ".gif", images)
+imageio.mimsave("data/animation/animation_" + datelist[-1] + "_graph2" + ".gif", images, fps = 7.5)
 
 # Animation du graphe 3
 numberOfDay = (datetime.date.today()-datetime.date(2020, 4, 4)).days
@@ -41,5 +40,4 @@ images = []
 for i in datelist:
     images.append(imageio.imread("data/" + i + "/" + i + "_3.png"))
 
-imageio.mimsave("data/animation/animation_" +
-                datelist[-1] + "_graph3" + ".gif", images)
+imageio.mimsave("data/animation/animation_" + datelist[-1] + "_graph3" + ".gif", images, fps = 7.5)

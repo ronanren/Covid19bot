@@ -83,7 +83,7 @@ $ python createAnimation.py
 - **Nouveaux guéris:** 'New Recovered'
 - **Nouveaux malades:** 'New Active'
 - **Nouveaux critique/en réanimation:** 'New Critical'
-- **Place dans le monde:** 'PlaceInWorld'
+- **Place du pays dans le monde:** 'PlaceInWorld'
 - **Total des tests réalisés:** 'Total Tests'
 - **Nouveaux tests réalisés:** 'New Tests'
 

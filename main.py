@@ -93,15 +93,16 @@ def makeGraph():
     plt.clf()
 
     # Graphe 3
+    nbrCountries = 5
     index = p.text.find('id="main_table_countries_today"')
     indexEnd = index + p.text[index:].find("</table>")
 
     countries = re.findall(r'(?<=<a class="mt_a" href="country\/)(.*)(?=\/">)', str(p.text[index:indexEnd]))
-    countries = [country.upper() for country in countries][:5]
+    countries = [country.upper() for country in countries][:nbrCountries]
     totalcases = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){50})', str(p.text[index:indexEnd]))
 
     totalCasesCountries = []
-    totalCasesCountries = (re.findall(r"[\d]{1,5},[\d]{3}", str(totalcases)))[:5]
+    totalCasesCountries = (re.findall(r"[\d]{1,5},[\d]{3}", str(totalcases)))[:nbrCountries]
 
     totaldeaths = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){180})', str(p.text[index:indexEnd]))
     totalDeathsCountries = []
@@ -109,16 +110,16 @@ def makeGraph():
     totalRecovered = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){380})', str(p.text[index:indexEnd]))
     totalRecoveredCountries = []
 
-
-    for x in range(0, 5):
+    for x in range(0, nbrCountries):
         indexRecovered = str(totalRecovered[x]).find('<td style="font-weight: bold; text-align:right">')
-        totalRecoveredCountries.append(int(re.findall(r"[\d]{1,5},[\d]{3}", str(totalRecovered[x])[indexRecovered+48:indexRecovered+70])[0].replace(",", "")))
+        totalRecovered[x] = str(totalRecovered[x]).replace("N/A", "0,000")
+        totalRecoveredCountries.append(int(re.findall(r"[\d]{1,5},[\d]{3}|[\d]{1,3}", str(totalRecovered[x])[indexRecovered+48:indexRecovered+70])[0].replace(",", "")))
 
-    for x in range(0, 5):
+    for x in range(0, nbrCountries):
         totalDeathsCountries.append(int(re.findall(
-            r"[\d]{1,5},[\d]{3}", str(totaldeaths[x][0][100:]))[0].replace(",", "")))
+            r"[\d]{1,5},[\d]{3}|[\d]{1,3}", str(totaldeaths[x][0][100:]))[0].replace(",", "")))
 
-    for x in range(0, 5):
+    for x in range(0, nbrCountries):
         totalCasesCountries[x] = int(totalCasesCountries[x].replace(",", ""))
 
     year = countries[::-1]
@@ -126,7 +127,7 @@ def makeGraph():
     deaths = totalDeathsCountries[::-1]
     recovered = totalRecoveredCountries[::-1]
 
-    totalcases = [totalcases[i]-deaths[i] for i in range(5)]
+    totalcases = [totalcases[i]-deaths[i] for i in range(nbrCountries)]
 
     bar1 = plt.barh(year, deaths, color="#2c3e50", label="Population décédée", height=0.8)
     bar2 = plt.barh(year, totalcases, left=deaths, color="#9b59b6", label="Population malade", height=0.8)

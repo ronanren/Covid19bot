@@ -93,7 +93,7 @@ def makeGraph():
     plt.clf()
 
     # Graphe 3
-    nbrCountries = 5
+    nbrCountries = 6
     index = p.text.find('id="main_table_countries_today"')
     indexEnd = index + p.text[index:].find("</table>")
 

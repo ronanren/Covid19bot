@@ -182,9 +182,6 @@ while True:
         # Vérifier si toutes les données sont publiées
         if (last_line[0] != str(date.today()) and cases[10] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
             verif = True
-        elif (int(cases[6].replace(".", "")) == int(last_line[7].replace(".", ""))):
-            spinner.color = 'yellow'
-            spinner.text = 'Données des cas critiques pas encore publiées ' + time.strftime("%H:%M:%S")
         else:
             spinner.color = 'magenta'
             spinner.text = 'Données déjà publiées ' + time.strftime("%H:%M:%S")

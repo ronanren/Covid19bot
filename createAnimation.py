@@ -3,7 +3,7 @@ import datetime
 
 # (0) Prendre en compte les graphiques jusqu'a aujourd'hui
 # (1) Prendre en compte les graphiques jusqu'a hier
-aujd = 1
+aujd = 0
 
 # Animation du graphe 1
 numberOfDay = (datetime.date.today()-datetime.date(2020, 3, 18)).days

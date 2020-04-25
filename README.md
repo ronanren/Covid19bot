@@ -101,9 +101,9 @@ $ python createAnimation.py
 # Graphiques générés automatiquement
 
 <p align="center">
-  <img src="data/2020-04-17/2020-04-17_1.png" width="48%">
-  <img src="data/2020-04-17/2020-04-17_2.png" width="48%">
-  <img src="data/2020-04-17/2020-04-17_3.png" width="50%">
+  <img src="data/2020-04-23/2020-04-23_1.png" width="48%">
+  <img src="data/2020-04-23/2020-04-23_2.png" width="48%">
+  <img src="data/2020-04-23/2020-04-23_3.png" width="50%">
 </p>
 
 # Animation
@@ -111,8 +111,9 @@ $ python createAnimation.py
 **Le script _createAnimation.py_ permet de créer un gif pour montrer l'évolution des différents graphiques**
 
 <p align="center">
-  <img src="data/animation/animation_2020-04-16_graph1.gif" width="48%">
-  <img src="data/animation/animation_2020-04-16_graph2.gif" width="48%">
+  <img src="data/animation/animation_2020-04-24_graph1.gif" width="48%">
+  <img src="data/animation/animation_2020-04-24_graph2.gif" width="48%">
+  <img src="data/animation/animation_2020-04-24_graph3.gif" width="50%">
 </p>
 
 # Licence

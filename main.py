@@ -134,6 +134,7 @@ def makeGraph():
     bar3 = plt.barh(year, recovered, color="#27ae60", label="Population guérie", height=0.4, align='edge')
 
     plt.legend(loc='lower right')
+    plt.ticklabel_format(style='plain', axis='x')
     plt.title('Avancé du COVID-19 dans le monde du ' + str(date.today().strftime("%A %d %B %Y")))
     plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_3.png')
     plt.clf()

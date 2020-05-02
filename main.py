@@ -154,9 +154,10 @@ while True:
     PlaceInWorld = p.text[:indexFranceEnd].count('href="country/')
 
     cases = re.findall(
-        r'[\d]{1,3}.[\d]{3}|\d+', str(p.text[indexFrance:indexFranceEnd]).replace(",", "."))
+        r'[\d]{1,3}.[\d]{3}|\d+|[\d]{1,2}.[\d]{3}.[\d]{3}', str(p.text[indexFrance:indexFranceEnd]).replace(",", "."))
     data = ["Total Cases", "New Cases", "Total Deaths",
-            "New Deaths", "Total Recovered", "Active Cases", "Critical"]
+            "New Deaths", "Total Recovered", "Active Cases", "Critical", "New Recovered", 
+            "New Active", "New Critical", "PlaceInWorld", "Total Tests", "New Tests"]
     numberOfDay = (date.today()-date(2020, 3, 16)).days
 
     verif = False

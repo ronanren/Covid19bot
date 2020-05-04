@@ -14,7 +14,8 @@ import config
 import shutil
 
 # Mettre les dates en francais
-locale.setlocale(locale.LC_TIME, '')
+locale.setlocale(locale.LC_TIME, 'french')
+
 spinner = Halo(text='Scrapping des données', spinner='dots', color='cyan')
 spinner.start()
 

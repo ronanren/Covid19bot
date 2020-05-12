@@ -111,9 +111,9 @@ $ python createAnimation.py
 **Le script _createAnimation.py_ permet de créer un gif pour montrer l'évolution des différents graphiques**
 
 <p align="center">
-  <img src="data/animation/animation_2020-04-24_graph1.gif" width="48%">
-  <img src="data/animation/animation_2020-04-24_graph2.gif" width="48%">
-  <img src="data/animation/animation_2020-04-24_graph3.gif" width="50%">
+  <img src="data/animation/animation_2020-05-10_graph1.gif" width="48%">
+  <img src="data/animation/animation_2020-05-10_graph2.gif" width="48%">
+  <img src="data/animation/animation_2020-05-10_graph3.gif" width="50%">
 </p>
 
 # Licence

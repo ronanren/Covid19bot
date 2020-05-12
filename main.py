@@ -62,27 +62,26 @@ def makeGraph():
 
     os.mkdir("data/" + str(date.today()))
     # Graphe 1
-    plt.plot(tabDate, tabTotalCases, "o-", label="Population touchée", linewidth=3, color="#9b59b6")
-    plt.plot(tabDate, tabActiveCases, "o-", label="Population malade", linewidth=3, color="#f1c40f")
-    plt.plot(tabDate, tabTotalRecovered, "o-", label="Population guérie", linewidth=3, color="#2ecc71")
-    plt.plot(tabDate, tabCritical, "o-", label="Population critique", linewidth=3, color="#e74c3c")
-    plt.plot(tabDate, tabTotalDeaths, "o-", label="Population décédée", linewidth=3, color="#2c3e50")
+    plt.plot(tabDate, tabTotalCases, "-", label="Population touchée", linewidth=3, color="#9b59b6")
+    plt.plot(tabDate, tabActiveCases, "-", label="Population malade", linewidth=3, color="#f1c40f")
+    plt.plot(tabDate, tabTotalRecovered, "-", label="Population guérie", linewidth=3, color="#2ecc71")
+    plt.plot(tabDate, tabCritical, "-", label="Population critique", linewidth=3, color="#e74c3c")
+    plt.plot(tabDate, tabTotalDeaths, "-", label="Population décédée", linewidth=3, color="#2c3e50")
 
-    plt.axis([0, numberOfDay + 1, 0, ceil(
-        (int(cases[0].replace(".", ""))/5000))*5000 + 5000])
+    plt.axis([0, numberOfDay + 1, 0, ceil((int(cases[0].replace(".", ""))/5000))*5000 + 5000])
     plt.legend(loc='upper left')
     plt.grid(True)
     plt.xlabel('Jours à partir du 17 mars 2020')
     plt.title('Avancé du COVID-19 en France du ' + str(date.today().strftime("%A %d %B %Y")))
     plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_1.png')
     plt.clf()
-    
+
     # Graphe 2
-    plt.plot(tabDate[1:], tabNewCases[1:], "o-", label="Population touchée chaque jour", linewidth=3, color="#9b59b6")
-    plt.plot(tabDate[1:], tabNewActive[1:], "o-", label="Population malade chaque jour", linewidth=3, color="#f1c40f")
-    plt.plot(tabDate[1:], tabNewRecovered[1:], "o-", label="Population guérie chaque jour", linewidth=3, color="#2ecc71")
-    plt.plot(tabDate[1:], tabNewCritical[1:], "o-", label="Population critique chaque jour", linewidth=3, color="#e74c3c")
-    plt.plot(tabDate[1:], tabNewDeaths[1:], "o-", label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
+    plt.plot(tabDate[1:], tabNewCases[1:], "-", label="Population touchée chaque jour", linewidth=3, color="#9b59b6")
+    plt.plot(tabDate[1:], tabNewActive[1:], "-", label="Population malade chaque jour", linewidth=3, color="#f1c40f")
+    plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=3, color="#2ecc71")
+    plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=3, color="#e74c3c")
+    plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
 
     plt.axis([0, numberOfDay + 1, 0, ceil(max(tabNewCases + tabNewActive + tabNewRecovered + tabNewCritical + tabNewDeaths)/1000)*1000 + 1000])
 
@@ -114,7 +113,8 @@ def makeGraph():
     for x in range(0, nbrCountries):
         indexRecovered = str(totalRecovered[x]).find('<td style="font-weight: bold; text-align:right">')
         totalRecovered[x] = str(totalRecovered[x]).replace("N/A", "0,000")
-        totalRecoveredCountries.append(int(re.findall(r"[\d]{1,5},[\d]{3}|[\d]{1,3}", str(totalRecovered[x])[indexRecovered+48:indexRecovered+70])[0].replace(",", "")))
+        totalRecoveredCountries.append(int(re.findall(r"[\d]{1,5},[\d]{3}|[\d]{1,3}", str(
+            totalRecovered[x])[indexRecovered+48:indexRecovered+70])[0].replace(",", "")))
 
     for x in range(0, nbrCountries):
         totalDeathsCountries.append(int(re.findall(
@@ -148,16 +148,14 @@ while True:
     # Parsing des données sur worldometers.info
     p = requests.get('https://www.worldometers.info/coronavirus/')
 
-    indexFrance = p.text.find(
-        '<a class="mt_a" href="country/france/">France</a>')
+    indexFrance = p.text.find('<a class="mt_a" href="country/france/">France</a>')
     indexFranceEnd = indexFrance + p.text[indexFrance:].find("</tr>")
 
     PlaceInWorld = p.text[:indexFranceEnd].count('href="country/')
 
-    cases = re.findall(
-        r'[\d]{1,2}.[\d]{3}.[\d]{3}|[\d]{1,3}.[\d]{3}|\d+', str(p.text[indexFrance:indexFranceEnd]).replace(",", "."))
+    cases = re.findall(r'[\d]{1,2}.[\d]{3}.[\d]{3}|[\d]{1,3}.[\d]{3}|\d+', str(p.text[indexFrance:indexFranceEnd]).replace(",", "."))
     data = ["Total Cases", "New Cases", "Total Deaths",
-            "New Deaths", "Total Recovered", "Active Cases", "Critical", "New Recovered", 
+            "New Deaths", "Total Recovered", "Active Cases", "Critical", "New Recovered",
             "New Active", "New Critical", "PlaceInWorld", "Total Tests", "New Tests"]
     numberOfDay = (date.today()-date(2020, 3, 16)).days
 
@@ -169,7 +167,7 @@ while True:
     # cases[2] = 0 # morts totaux
     # cases[3] = 0 # nouveaux morts
     # cases[4] = 0 # guéris totaux
-    # cases[5] = 0 # malades 
+    # cases[5] = 0 # malades
     # cases[6] = 0 # cas critique/en réanimation
     # cases[7] = 0 # nouveaux guéris
     # cases[8] = 0 # nouveaux malades
@@ -182,6 +180,7 @@ while True:
     f1 = open("data/dataFrance.csv", "r")
     last_line = f1.readlines()[-1].split(',')
     f1.close()
+
     try:
         # Vérifier si toutes les données sont publiées
         if (last_line[0] != str(date.today()) and cases[10] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
@@ -207,8 +206,7 @@ while True:
 
         # Enregistrer les données dans le CSV
         f = open("data/dataFrance.csv", "a+")
-        f.write(str(date.today()) + "," + cases[0] + "," + cases[1] +
-                "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[5] + "," + cases[6] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[9] + "," + str(newTests) + "\n")
+        f.write(str(date.today()) + "," + cases[0] + "," + cases[1] + "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[5] + "," + cases[6] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[9] + "," + str(newTests) + "\n")
         f.close()
 
         makeTabOfData()
@@ -225,7 +223,8 @@ while True:
             ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves " + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
         else:
             ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
-        ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(".", "") + " [" + str(newDeathPercent) + "%]\n"
+        ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(
+            ".", "") + " [" + str(newDeathPercent) + "%]\n"
         if (newTests > 0):
             ligne6 = "💉 " + cases[9].replace(".", ",") + " tests +" + str(newTests) + "\n\n"
         else:
@@ -233,7 +232,7 @@ while True:
         ligne7 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")
         ligne8 = "\n\nGraphiques📈⏬\n#ConfinementJour" + str(numberOfDay)
         message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7 + ligne8
-        
+
         consumer_key = config.consumer_key
         consumer_secret = config.consumer_secret
         access_token = config.access_token
@@ -241,18 +240,18 @@ while True:
 
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
-         
+
         api = tweepy.API(auth)
-        
+
         api.update_status(message)
-        lastIdTweet = api.user_timeline(count = 1)[0].id
+        lastIdTweet = api.user_timeline(count=1)[0].id
 
         image1 = "data/" + str(date.today()) + "/" + str(date.today()) + "_1.png"
         image2 = "data/" + str(date.today()) + "/" + str(date.today()) + "_2.png"
         image3 = "data/" + str(date.today()) + "/" + str(date.today()) + "_3.png"
         images = (image1, image2, image3)
         media_ids = [api.media_upload(i).media_id_string for i in images]
-        api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id = lastIdTweet)
+        api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)
         spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
         spinner.start()
     time.sleep(30)

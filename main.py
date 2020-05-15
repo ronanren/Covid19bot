@@ -183,7 +183,7 @@ while True:
 
     try:
         # Vérifier si toutes les données sont publiées
-        if (last_line[0] != str(date.today()) and cases[10] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
+        if (last_line[0] != str(date.today()) and cases[11] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
             verif = True
         else:
             spinner.color = 'magenta'

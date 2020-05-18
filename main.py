@@ -157,7 +157,7 @@ while True:
     data = ["Total Cases", "New Cases", "Total Deaths",
             "New Deaths", "Total Recovered", "Active Cases", "Critical", "New Recovered",
             "New Active", "New Critical", "PlaceInWorld", "Total Tests", "New Tests"]
-    numberOfDay = (date.today()-date(2020, 3, 16)).days
+    numberOfDay = (date.today()-date(2020, 5, 10)).days
 
     verif = False
 
@@ -230,7 +230,7 @@ while True:
         else:
             ligne6 = "\n\n"
         ligne7 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")
-        ligne8 = "\n\nGraphiques📈⏬\n#ConfinementJour" + str(numberOfDay)
+        ligne8 = "\n\nGraphiques📈⏬\n#DeconfinementJour" + str(numberOfDay)
         message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7 + ligne8
 
         consumer_key = config.consumer_key

@@ -83,7 +83,7 @@ def makeGraph():
     plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=3, color="#e74c3c")
     plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
 
-    plt.axis([0, numberOfDay + 1, 0, ceil(max(tabNewCases + tabNewActive + tabNewRecovered + tabNewCritical + tabNewDeaths)/1000)*1000 + 1000])
+    plt.axis([0, numberOfDay + 1, 0, ceil(max(tabNewCases + tabNewActive + tabNewRecovered + tabNewCritical + tabNewDeaths)/1000)*1000 + 100])
 
     plt.legend(loc='upper left')
     plt.grid(True)

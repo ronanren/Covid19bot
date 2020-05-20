@@ -118,7 +118,7 @@ $ python createAnimation.py
 
 # Licence
 
-MIT
+ <a href="https://github.com/ronanren/Covid19bot/blob/master/LICENSE" target="_blank">MIT</a> 
 
 # Contactez-moi
 

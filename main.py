@@ -136,6 +136,7 @@ def makeGraph():
 
     plt.legend(loc='lower right')
     plt.ticklabel_format(style='plain', axis='x')
+    plt.xticks(fontsize=7.5, rotation=35, ha="right")
     plt.title('Avancé du COVID-19 dans le monde du ' + str(date.today().strftime("%A %d %B %Y")))
     plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_3.png')
     plt.clf()

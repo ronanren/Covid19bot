@@ -39,7 +39,6 @@ def makeTabOfData():
         for row in csv_reader:
             if line_count != 0:
                 tabTotalCases.append(int(row[1].replace(".", "")))
-                tabNewCases.append(int(row[2].replace(".", "")))
                 tabTotalDeaths.append(int(row[3].replace(".", "")))
                 tabNewDeaths.append(int(row[4].replace(".", "")))
                 tabTotalRecovered.append(int(row[5].replace(".", "")))
@@ -54,6 +53,10 @@ def makeTabOfData():
                     tabNewCritical.append(0)
                 else:
                     tabNewCritical.append(int(row[10].replace(".", "")))
+                if (int(row[2].replace(".", "")) < 0):
+                    tabNewCases.append(0)
+                else:
+                    tabNewCases.append(int(row[2].replace(".", "")))
                 tabDate.append(line_count)
             line_count += 1
 

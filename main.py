@@ -179,6 +179,8 @@ while True:
     # cases[11] = 0 # tests totaux
     # cases[12] = 0 # nouveaux tests
 
+    #cases.insert(index, 'valeur')
+
     # Retrouver les données d'hier
     f1 = open("data/dataFrance.csv", "r")
     last_line = f1.readlines()[-1].split(',')

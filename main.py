@@ -157,7 +157,7 @@ while True:
 
     PlaceInWorld = p.text[:indexFranceEnd].count('href="country/')
 
-    cases = re.findall(r'[\d]{1,2}.[\d]{3}.[\d]{3}|[\d]{1,3}.[\d]{3}|\d+', str(p.text[indexFrance:indexFranceEnd]).replace(",", "."))
+    cases = re.findall(r'[\d]{1,2}.[\d]{3}.[\d]{3}|[\d]{1,3}.[\d]{3}|\d+', str(p.text[indexFrance:indexFranceEnd]).replace(",", ".").replace("background-color:#c8e6c9; color:#000", ""))
     data = ["Total Cases", "New Cases", "Total Deaths",
             "New Deaths", "Total Recovered", "Active Cases", "Critical", "New Recovered",
             "New Active", "New Critical", "PlaceInWorld", "Total Tests", "New Tests"]
@@ -191,7 +191,7 @@ while True:
 
     try:
         # Vérifier si toutes les données sont publiées
-        if (last_line[0] != str(date.today()) and cases[11] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
+        if (last_line[0] != str(date.today()) and cases[15] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
             verif = True
         else:
             spinner.color = 'magenta'

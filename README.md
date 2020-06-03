@@ -96,9 +96,9 @@ $ python main.py
 # Graphiques générés automatiquement
 
 <p align="center">
-  <img src="data/2020-04-23/franceTotal.png" width="48%">
-  <img src="data/2020-04-23/franceToday.png" width="48%">
-  <img src="data/2020-04-23/2020-06-01.png" width="50%">
+  <img src="data/franceTotal.png" width="48%">
+  <img src="data/franceToday.png" width="48%">
+  <img src="data/2020-06-01.png" width="50%">
 </p>
 
 # Licence

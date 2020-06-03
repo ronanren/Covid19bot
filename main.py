@@ -173,14 +173,12 @@ while True:
     # cases[2] = 0 # morts totaux
     # cases[3] = 0 # nouveaux morts
     # cases[4] = 0 # guéris totaux
-    # cases[5] = 0 # malades
-    # cases[6] = 0 # cas critique/en réanimation
-    # cases[7] = 0 # nouveaux guéris
-    # cases[8] = 0 # nouveaux malades
-    # cases[9] = 0 # nouveaux critique/en réanimation
-    # cases[10] = 0 # place dans le monde
-    # cases[11] = 0 # tests totaux
-    # cases[12] = 0 # nouveaux tests
+    # cases[5] = 0 # New Recovered| Not used here
+    # cases[6] = 0 # malades
+    # cases[7] = 0 # cas critique/en réanimation
+    # cases[8] = 0 # nouveaux guéris| Not used here
+    # cases[9] = 0 # nouveaux malades| Not used here
+    # cases[10] = 0 # nouveaux critique/en réanimation
 
     #cases.insert(index, 'valeur')
 
@@ -191,7 +189,7 @@ while True:
 
     try:
         # Vérifier si toutes les données sont publiées
-        if (last_line[0] != str(date.today()) and cases[15] and int(cases[6].replace(".", "")) != int(last_line[7].replace(".", ""))):
+        if (last_line[0] != str(date.today()) and cases[15] and int(cases[7].replace(".", "")) != int(last_line[7].replace(".", ""))):
             verif = True
         else:
             spinner.color = 'magenta'
@@ -202,9 +200,9 @@ while True:
     if (verif):
 
         newRecovered = int(cases[4].replace(".", "")) - int(last_line[5].replace(".", ""))
-        newCritical = int(cases[6].replace(".", "")) - int(last_line[7].replace(".", ""))
-        newActive = int(cases[5].replace(".", "")) - int(last_line[6].replace(".", ""))
-        newTests = int(cases[9].replace(".", "")) - int(last_line[12].replace(".", ""))
+        newCritical = int(cases[7].replace(".", "")) - int(last_line[7].replace(".", ""))
+        newActive = int(cases[6].replace(".", "")) - int(last_line[6].replace(".", ""))
+        newTests = int(cases[10].replace(".", "")) - int(last_line[12].replace(".", ""))
 
         # Pourcentage des nouveaux cas comparés au cas d'hier
         newRecoveredPercent = round(100 * (int(newRecovered)/int(last_line[8].replace(".", ""))), 2)
@@ -214,7 +212,7 @@ while True:
 
         # Enregistrer les données dans le CSV
         f = open("data/dataFrance.csv", "a+")
-        f.write(str(date.today()) + "," + cases[0] + "," + cases[1] + "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[5] + "," + cases[6] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[9] + "," + str(newTests) + "\n")
+        f.write(str(date.today()) + "," + cases[0] + "," + cases[1] + "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[6] + "," + cases[7] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[10] + "," + str(newTests) + "\n")
         f.close()
 
         makeTabOfData()
@@ -224,17 +222,17 @@ while True:
         ligne1 = "La 🇫🇷 est " + str(PlaceInWorld) + "ème au 🌎\n"
         ligne2 = "🟢 " + cases[4].replace(".", ",") + " guéris +" + str(newRecovered) + " [" + str(newRecoveredPercent) + "%]\n"
         if (newActive < 0):
-            ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades " + str(newActive) + " [" + str(newActivePercent) + "%]\n"
+            ligne3 = "🟠 " + cases[6].replace(".", ",") + " malades " + str(newActive) + " [" + str(newActivePercent) + "%]\n"
         else:
-            ligne3 = "🟠 " + cases[5].replace(".", ",") + " malades +" + str(newActive) + " [" + str(newActivePercent) + "%]\n"
+            ligne3 = "🟠 " + cases[6].replace(".", ",") + " malades +" + str(newActive) + " [" + str(newActivePercent) + "%]\n"
         if (newCritical < 0):
-            ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves " + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
+            ligne4 = "🔴 " + cases[7].replace(".", ",") + " cas graves " + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
         else:
-            ligne4 = "🔴 " + cases[6].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
+            ligne4 = "🔴 " + cases[7].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
         ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(
             ".", "") + " [" + str(newDeathPercent) + "%]\n"
         if (newTests > 0):
-            ligne6 = "💉 " + cases[9].replace(".", ",") + " tests +" + str(newTests) + "\n\n"
+            ligne6 = "💉 " + cases[10].replace(".", ",") + " tests +" + str(newTests) + "\n\n"
         else:
             ligne6 = "\n\n"
         ligne7 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")

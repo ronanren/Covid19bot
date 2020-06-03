@@ -139,7 +139,7 @@ def makeGraph():
     plt.ticklabel_format(style='plain', axis='x')
     plt.xticks(fontsize=7.5, rotation=35, ha="right")
     plt.title('Avancé du COVID-19 dans le monde du ' + str(date.today().strftime("%A %d %B %Y")))
-    plt.savefig('data/' + str(date.today()) + '.png')
+    plt.savefig('data/global.png')
     plt.clf()
 
 
@@ -252,7 +252,7 @@ while True:
 
         image1 = "data/franceTotal.png"
         image2 = "data/franceToday.png"
-        image3 = "data/" + str(date.today()) + ".png"
+        image3 = "data/global.png"
         images = (image1, image2, image3)
         media_ids = [api.media_upload(i).media_id_string for i in images]
         api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)

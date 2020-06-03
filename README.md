@@ -98,7 +98,7 @@ $ python main.py
 <p align="center">
   <img src="data/franceTotal.png" width="48%">
   <img src="data/franceToday.png" width="48%">
-  <img src="data/2020-06-01.png" width="50%">
+  <img src="data/global.png" width="50%">
 </p>
 
 # Licence

@@ -7,7 +7,6 @@
   <a href="https://badge.fury.io/py/matplotlib"><img src="https://badge.fury.io/py/matplotlib.svg" alt="PyPI version" height="18"></a>
   <a href="https://badge.fury.io/py/halo"><img src="https://badge.fury.io/py/halo.svg" alt="PyPI version" height="18"></a>
   <a href="https://badge.fury.io/py/tweepy"><img src="https://badge.fury.io/py/tweepy.svg" alt="PyPI version" height="18"></a>
-  <a href="https://badge.fury.io/py/imageio"><img src="https://badge.fury.io/py/imageio.svg" alt="PyPI version" height="18"></a>
 </p>
 
 <p align="center">
@@ -16,7 +15,6 @@
   <a href="#Enregistrement-en-CSV">Enregistrement en CSV</a> |
   <a href="#Tweet">Tweet</a> |
   <a href="#graphiques-générés-automatiquement">Graphique</a> |
-  <a href="#Animation">Animation</a> |
   <a href="#Licence">Licence</a> |
   <br>
   <a href="#Contactez-moi">Contactez-moi</a> | 
@@ -57,9 +55,6 @@ access_token_secret = "access_token_secret"
 
 # Lancer le script
 $ python main.py
-
-# Générer les animations
-$ python createAnimation.py
 ```
 
 # Enregistrement en CSV
@@ -101,24 +96,14 @@ $ python createAnimation.py
 # Graphiques générés automatiquement
 
 <p align="center">
-  <img src="data/2020-04-23/2020-04-23_1.png" width="48%">
-  <img src="data/2020-04-23/2020-04-23_2.png" width="48%">
-  <img src="data/2020-04-23/2020-04-23_3.png" width="50%">
-</p>
-
-# Animation
-
-**Le script _createAnimation.py_ permet de créer un gif pour montrer l'évolution des différents graphiques**
-
-<p align="center">
-  <img src="data/animation/animation_2020-05-10_graph1.gif" width="48%">
-  <img src="data/animation/animation_2020-05-10_graph2.gif" width="48%">
-  <img src="data/animation/animation_2020-05-10_graph3.gif" width="50%">
+  <img src="data/2020-04-23/franceTotal.png" width="48%">
+  <img src="data/2020-04-23/franceToday.png" width="48%">
+  <img src="data/2020-04-23/2020-06-01.png" width="50%">
 </p>
 
 # Licence
 
- <a href="https://github.com/ronanren/Covid19bot/blob/master/LICENSE" target="_blank">MIT</a> 
+<a href="https://github.com/ronanren/Covid19bot/blob/master/LICENSE" target="_blank">MIT</a>
 
 # Contactez-moi
 

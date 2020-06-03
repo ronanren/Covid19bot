@@ -5,13 +5,12 @@ from datetime import date
 import matplotlib.pyplot as plt
 from math import ceil
 import csv
-import os
 import time
 import locale
 from halo import Halo
 import tweepy
 import config
-import shutil
+
 
 # Mettre les dates en francais
 locale.setlocale(locale.LC_TIME, '')
@@ -63,7 +62,6 @@ def makeTabOfData():
 
 def makeGraph():
 
-    os.mkdir("data/" + str(date.today()))
     # Graphe 1
     plt.plot(tabDate, tabTotalCases, "-", label="Population touchée", linewidth=3, color="#9b59b6")
     plt.plot(tabDate, tabActiveCases, "-", label="Population malade", linewidth=3, color="#f1c40f")
@@ -76,7 +74,7 @@ def makeGraph():
     plt.grid(True)
     plt.xlabel('Jours à partir du 17 mars 2020')
     plt.title('Avancé du COVID-19 en France du ' + str(date.today().strftime("%A %d %B %Y")))
-    plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_1.png')
+    plt.savefig('data/franceTotal.png')
     plt.clf()
 
     # Graphe 2
@@ -92,7 +90,7 @@ def makeGraph():
     plt.grid(True)
     plt.xlabel('Jours à partir du 18 mars 2020')
     plt.title('Avancé du COVID-19 en France du ' + str(date.today().strftime("%A %d %B %Y")))
-    plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_2.png')
+    plt.savefig('data/franceToday.png')
     plt.clf()
 
     # Graphe 3
@@ -141,7 +139,7 @@ def makeGraph():
     plt.ticklabel_format(style='plain', axis='x')
     plt.xticks(fontsize=7.5, rotation=35, ha="right")
     plt.title('Avancé du COVID-19 dans le monde du ' + str(date.today().strftime("%A %d %B %Y")))
-    plt.savefig('data/' + str(date.today()) + "/" + str(date.today()) + '_3.png')
+    plt.savefig('data/' + str(date.today()) + '.png')
     plt.clf()
 
 
@@ -252,9 +250,9 @@ while True:
         api.update_status(message)
         lastIdTweet = api.user_timeline(count=1)[0].id
 
-        image1 = "data/" + str(date.today()) + "/" + str(date.today()) + "_1.png"
-        image2 = "data/" + str(date.today()) + "/" + str(date.today()) + "_2.png"
-        image3 = "data/" + str(date.today()) + "/" + str(date.today()) + "_3.png"
+        image1 = "data/franceTotal.png"
+        image2 = "data/franceToday.png"
+        image3 = "data/" + str(date.today()) + ".png"
         images = (image1, image2, image3)
         media_ids = [api.media_upload(i).media_id_string for i in images]
         api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)

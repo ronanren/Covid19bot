@@ -44,18 +44,9 @@ def makeTabOfData():
                 tabActiveCases.append(int(row[6].replace(".", "")))
                 tabCritical.append(int(row[7].replace(".", "")))
                 tabNewRecovered.append(int(row[8].replace(".", "")))
-                if (int(row[9].replace(".", "")) < 0):
-                    tabNewActive.append(0)
-                else:
-                    tabNewActive.append(int(row[9].replace(".", "")))
-                if (int(row[10].replace(".", "")) < 0):
-                    tabNewCritical.append(0)
-                else:
-                    tabNewCritical.append(int(row[10].replace(".", "")))
-                if (int(row[2].replace(".", "")) < 0):
-                    tabNewCases.append(0)
-                else:
-                    tabNewCases.append(int(row[2].replace(".", "")))
+                tabNewActive.append(int(row[9].replace(".", "")))   
+                tabNewCritical.append(int(row[10].replace(".", "")))
+                tabNewCases.append(int(row[2].replace(".", "")))
                 tabDate.append(line_count)
             line_count += 1
 
@@ -63,13 +54,12 @@ def makeTabOfData():
 def makeGraph():
 
     # Graphe 1
-    plt.plot(tabDate, tabTotalCases, "-", label="Population touchée", linewidth=3, color="#9b59b6")
+    #plt.plot(tabDate, tabTotalCases, "-", label="Population touchée", linewidth=3, color="#9b59b6")
     plt.plot(tabDate, tabActiveCases, "-", label="Population malade", linewidth=3, color="#f1c40f")
     plt.plot(tabDate, tabTotalRecovered, "-", label="Population guérie", linewidth=3, color="#2ecc71")
     plt.plot(tabDate, tabCritical, "-", label="Population critique", linewidth=3, color="#e74c3c")
     plt.plot(tabDate, tabTotalDeaths, "-", label="Population décédée", linewidth=3, color="#2c3e50")
 
-    plt.axis([0, numberOfDay + 1, 0, ceil((int(cases[0].replace(".", ""))/5000))*5000 + 5000])
     plt.legend(loc='upper left')
     plt.grid(True)
     plt.xlabel('Jours à partir du 17 mars 2020')
@@ -84,9 +74,7 @@ def makeGraph():
     plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=3, color="#e74c3c")
     plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
 
-    plt.axis([0, numberOfDay + 1, 0, ceil(max(tabNewCases + tabNewActive + tabNewRecovered + tabNewCritical + tabNewDeaths)/1000)*1000 + 100])
-
-    plt.legend(loc='upper left')
+    plt.legend(loc='best')
     plt.grid(True)
     plt.xlabel('Jours à partir du 18 mars 2020')
     plt.title('Avancé du COVID-19 en France du ' + str(date.today().strftime("%A %d %B %Y")))

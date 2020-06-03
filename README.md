@@ -31,8 +31,7 @@ Bot utilisé sur le compte twitter : <a href="https://twitter.com/FrenchCovid" t
 
 - Vérification régulière pour vérifier si les nouvelles données du jour sont publiées
 - Enregistrement des nouvelles données quotidiennes dans un CSV
-- Création de 3 graphiques (statistiques total, statistiques quotidiennes et statistiques mondiales des 5 premiers pays les plus touchés)
-- Générer une animation des différents graphiques
+- Création de 3 graphiques (statistiques total, statistiques quotidiennes et statistiques mondiales des 8 premiers pays les plus touchés)
 - Création et envoi de 2 tweets (les données du jour et les différents graphiques)
 
 # Utilisation

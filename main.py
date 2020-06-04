@@ -120,7 +120,7 @@ def makeGraph():
     totalcases = [totalcases[i]-deaths[i] for i in range(nbrCountries)]
 
     bar1 = plt.barh(year, deaths, color="#2c3e50", label="Population décédée", height=0.8)
-    bar2 = plt.barh(year, totalcases, left=deaths, color="#9b59b6", label="Population malade", height=0.8)
+    bar2 = plt.barh(year, totalcases, left=deaths, color="#9b59b6", label="Population touchée", height=0.8)
     bar3 = plt.barh(year, recovered, color="#27ae60", label="Population guérie", height=0.4, align='edge')
 
     plt.legend(loc='lower right')

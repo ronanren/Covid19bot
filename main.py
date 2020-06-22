@@ -175,7 +175,7 @@ while True:
 
     try:
         # Vérifier si toutes les données sont publiées
-        if (last_line[0] != str(date.today()) and cases[15] and int(cases[7].replace(".", "")) != int(last_line[7].replace(".", ""))):
+        if (last_line[0] != str(date.today()) and cases[15]):
             verif = True
         else:
             spinner.color = 'magenta'
@@ -193,9 +193,14 @@ while True:
         # Pourcentage des nouveaux cas comparés au cas d'hier
         newRecoveredPercent = round(100 * (int(newRecovered)/int(last_line[8].replace(".", ""))), 2)
         newActivePercent = round(100 * (int(newActive)/int(last_line[9].replace(".", ""))), 2)
-        newCriticalPercent = round(100 * (int(newCritical)/int(last_line[10].replace(".", ""))), 2)
         newDeathPercent = round(100 * (int(cases[3].replace(".", ""))/int(last_line[4].replace(".", ""))), 2)
 
+        if (int(last_line[10].replace(".", "")) == 0):
+            newCriticalPercent = round(100 * (int(newCritical)), 2)
+        else:
+            newCriticalPercent = round(100 * (int(newCritical)/int(last_line[10].replace(".", ""))), 2)
+
+        
         # Enregistrer les données dans le CSV
         f = open("data/dataFrance.csv", "a+")
         f.write(str(date.today()) + "," + cases[0] + "," + cases[1] + "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[6] + "," + cases[7] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[10] + "," + str(newTests) + "\n")

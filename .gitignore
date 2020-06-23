@@ -2,4 +2,3 @@
 *.pyc
 config.py
 nohup.out
-makegraph.py

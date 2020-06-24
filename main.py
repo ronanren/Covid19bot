@@ -177,7 +177,7 @@ while True:
 
         try:
             # Vérifier si toutes les données sont publiées
-            if (last_line[0] != str(datetime.datetime.today()) and cases[15]):
+            if (last_line[0] != str("20" + datetime.datetime.today().strftime("%y-%m-%d")) and cases[15]):
                 verif = True
             else:
                 spinner.color = 'magenta'
@@ -205,7 +205,7 @@ while True:
             
             # Enregistrer les données dans le CSV
             f = open("data/dataFrance.csv", "a+")
-            f.write(str(datetime.datetime.today()) + "," + cases[0] + "," + cases[1] + "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[6] + "," + cases[7] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[10] + "," + str(newTests) + "\n")
+            f.write(str("20" + datetime.datetime.today().strftime("%y-%m-%d")) + "," + cases[0] + "," + cases[1] + "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[6] + "," + cases[7] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[10] + "," + str(newTests) + "\n")
             f.close()
 
             makeTabOfData()

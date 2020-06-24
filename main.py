@@ -102,7 +102,7 @@ def makeGraph():
     for x in range(0, nbrCountries):
         indexRecovered = str(totalRecovered[x]).find('<td style="font-weight: bold; text-align:right">')
         totalRecovered[x] = str(totalRecovered[x]).replace("N/A", "0,000")
-        totalRecoveredCountries.append(int(re.findall(r"[\d]{1,5},[\d]{3}|[\d]{1,3}", str(
+        totalRecoveredCountries.append(int(re.findall(r"[\d]{1,5},[\d]{3}|[\d]{1,3}|[\d]{1,3},[\d]{3},[\d]{3}", str(
             totalRecovered[x])[indexRecovered+48:indexRecovered+70])[0].replace(",", "")))
 
     for x in range(0, nbrCountries):

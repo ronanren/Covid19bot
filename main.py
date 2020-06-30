@@ -194,9 +194,13 @@ while True:
             newTests = int(cases[10].replace(".", "")) - int(last_line[12].replace(".", ""))
 
             # Pourcentage des nouveaux cas comparés au cas d'hier
-            newRecoveredPercent = round(100 * (int(newRecovered)/int(last_line[8].replace(".", ""))), 2)
             newActivePercent = round(100 * (int(newActive)/int(last_line[9].replace(".", ""))), 2)
             newDeathPercent = round(100 * (int(cases[3].replace(".", ""))/int(last_line[4].replace(".", ""))), 2)
+
+            if (int(last_line[8].replace(".", "")) == 0):
+                newRecoveredPercent = round(100 * (int(newRecovered)), 2)
+            else:
+                newRecoveredPercent = round(100 * (int(newRecovered)/int(last_line[8].replace(".", ""))), 2)
 
             if (int(last_line[10].replace(".", "")) == 0):
                 newCriticalPercent = round(100 * (int(newCritical)), 2)

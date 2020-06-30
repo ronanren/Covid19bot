@@ -169,6 +169,7 @@ while True:
         # cases[10] = 0 # nouveaux critique/en réanimation
 
         #cases.insert(index, 'valeur')
+        cases.insert(5, '0')
 
         # Retrouver les données d'hier
         f1 = open("data/dataFrance.csv", "r")
@@ -177,7 +178,7 @@ while True:
 
         try:
             # Vérifier si toutes les données sont publiées
-            if (last_line[0] != str("20" + datetime.datetime.today().strftime("%y-%m-%d")) and cases[15]):
+            if (last_line[0] != str("20" + datetime.datetime.today().strftime("%y-%m-%d")) and cases[14]):
                 verif = True
             else:
                 spinner.color = 'magenta'

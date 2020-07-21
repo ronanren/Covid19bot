@@ -177,7 +177,7 @@ while True:
 
         try:
             # Vérifier si toutes les données sont publiées
-            if (last_line[0] != str("20" + datetime.datetime.today().strftime("%y-%m-%d")) and cases[14]):
+            if (last_line[0] != str("20" + datetime.datetime.today().strftime("%y-%m-%d")) and cases[15]):
                 verif = True
             else:
                 spinner.color = 'magenta'

@@ -237,7 +237,7 @@ while True:
             else:
                 ligne6 = "\n\n"
             ligne7 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")
-            ligne8 = "\n\nGraphiques📈⏬\n#DeconfinementJour" + str(numberOfDayDeconfinement)
+            ligne8 = "\n\nGraphiques📈⏬\n#COVIDー19"
             message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7 + ligne8 
             
             consumer_key = config.consumer_key

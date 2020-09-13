@@ -82,7 +82,19 @@ def makeGraph():
     plt.clf()
 
     # Graphe 3
-    nbrCountries = 8
+    plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=3, color="#2ecc71")
+    plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=3, color="#e74c3c")
+    plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
+
+    plt.legend(loc='best')
+    plt.grid(True)
+    plt.xlabel('Jours à partir du 18 mars 2020')
+    plt.title('Avancé du COVID-19 en France du ' + str(datetime.datetime.today().strftime("%A %d %B %Y")))
+    plt.savefig('data/franceTodaySansMalade.png')
+    plt.clf()
+
+    # Graphe 4
+    nbrCountries = 15
     index = p.text.find('id="main_table_countries_today"')
     indexEnd = index + p.text[index:].find("</table>")
 
@@ -255,8 +267,9 @@ while True:
 
             image1 = "data/franceTotal.png"
             image2 = "data/franceToday.png"
-            image3 = "data/global.png"
-            images = (image1, image2, image3)
+            image3 = "data/franceTodaySansMalade.png"
+            image4 = "data/global.png"
+            images = (image1, image2, image3, image4)
             media_ids = [api.media_upload(i).media_id_string for i in images]
             api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)
             spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))

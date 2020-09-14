@@ -70,9 +70,9 @@ def makeGraph():
     # Graphe 2
     #plt.plot(tabDate[1:], tabNewCases[1:], "-", label="Population touchée chaque jour", linewidth=3, color="#9b59b6")
     plt.plot(tabDate[1:], tabNewActive[1:], "-", label="Population malade chaque jour", linewidth=3, color="#f1c40f")
-    plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=3, color="#2ecc71")
-    plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=3, color="#e74c3c")
-    plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
+    #plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=3, color="#2ecc71")
+    #plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=3, color="#e74c3c")
+    #plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
 
     plt.legend(loc='best')
     plt.grid(True)

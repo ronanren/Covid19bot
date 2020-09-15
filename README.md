@@ -96,7 +96,7 @@ $ python main.py
 <p align="center">
   <img src="data/franceTotal.png" width="48%">
   <img src="data/franceToday.png" width="48%">
-  <img src="data/franceTodaySansmalade.png" width="48%">
+  <img src="data/franceTodaySansMalade.png" width="48%">
   <img src="data/global.png" width="48%">
 </p>
 

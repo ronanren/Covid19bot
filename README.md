@@ -31,8 +31,8 @@ Bot utilisé sur le compte twitter : <a href="https://twitter.com/FrenchCovid" t
 
 - Vérification régulière pour vérifier si les nouvelles données du jour sont publiées
 - Enregistrement des nouvelles données quotidiennes dans un CSV
-- Création de 3 graphiques (statistiques total, statistiques quotidiennes et statistiques mondiales des 8 premiers pays les plus touchés)
-- Création et envoi de 2 tweets (les données du jour et les différents graphiques)
+- Création de 4 graphiques (statistiques total de la France, 2 graphiques sur les statistiques quotidiennes et un graphique des statistiques mondiales des 15 premiers pays les plus touchés)
+- Création et envoi de deux tweets (les données du jour et les différents graphiques)
 
 # Utilisation
 
@@ -88,8 +88,7 @@ $ python main.py
 ### Exemple des tweets quotidiens :
 
 <p align="center">
-  <img src="images/exampleTweet1.png" width="48%">
-  <img src="images/exampleTweet2.png" width="48.70%">
+  <img src="images/exampleTweet.png" width="55%">
 </p>
 
 # Graphiques générés automatiquement
@@ -97,7 +96,8 @@ $ python main.py
 <p align="center">
   <img src="data/franceTotal.png" width="48%">
   <img src="data/franceToday.png" width="48%">
-  <img src="data/global.png" width="50%">
+  <img src="data/franceTodaySansmalade.png" width="48%">
+  <img src="data/global.png" width="48%">
 </p>
 
 # Licence

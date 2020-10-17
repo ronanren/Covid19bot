@@ -54,11 +54,11 @@ def makeTabOfData():
 def makeGraph():
 
     # Graphe 1
-    #plt.plot(tabDate, tabTotalCases, "-", label="Population touchée", linewidth=3, color="#9b59b6")
-    plt.plot(tabDate, tabActiveCases, "-", label="Population malade", linewidth=3, color="#f1c40f")
-    plt.plot(tabDate, tabTotalRecovered, "-", label="Population guérie", linewidth=3, color="#2ecc71")
-    plt.plot(tabDate, tabCritical, "-", label="Population critique", linewidth=3, color="#e74c3c")
-    plt.plot(tabDate, tabTotalDeaths, "-", label="Population décédée", linewidth=3, color="#2c3e50")
+    #plt.plot(tabDate, tabTotalCases, "-", label="Population touchée", linewidth=2, color="#9b59b6")
+    plt.plot(tabDate, tabActiveCases, "-", label="Population malade", linewidth=2, color="#f1c40f")
+    plt.plot(tabDate, tabTotalRecovered, "-", label="Population guérie", linewidth=2, color="#2ecc71")
+    plt.plot(tabDate, tabCritical, "-", label="Population critique", linewidth=2, color="#e74c3c")
+    plt.plot(tabDate, tabTotalDeaths, "-", label="Population décédée", linewidth=2, color="#2c3e50")
 
     plt.legend(loc='upper left')
     plt.grid(True)
@@ -68,11 +68,11 @@ def makeGraph():
     plt.clf()
 
     # Graphe 2
-    #plt.plot(tabDate[1:], tabNewCases[1:], "-", label="Population touchée chaque jour", linewidth=3, color="#9b59b6")
-    plt.plot(tabDate[1:], tabNewActive[1:], "-", label="Population malade chaque jour", linewidth=3, color="#f1c40f")
-    #plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=3, color="#2ecc71")
-    #plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=3, color="#e74c3c")
-    #plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
+    #plt.plot(tabDate[1:], tabNewCases[1:], "-", label="Population touchée chaque jour", linewidth=2, color="#9b59b6")
+    plt.plot(tabDate[1:], tabNewActive[1:], "-", label="Population malade chaque jour", linewidth=2, color="#f1c40f")
+    #plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=2, color="#2ecc71")
+    #plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=2, color="#e74c3c")
+    #plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=2, color="#2c3e50")
 
     plt.legend(loc='best')
     plt.grid(True)
@@ -82,9 +82,9 @@ def makeGraph():
     plt.clf()
 
     # Graphe 3
-    plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=3, color="#2ecc71")
-    plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=3, color="#e74c3c")
-    plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=3, color="#2c3e50")
+    plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=2, color="#2ecc71")
+    plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=2, color="#e74c3c")
+    plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=2, color="#2c3e50")
 
     plt.legend(loc='best')
     plt.grid(True)

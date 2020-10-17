@@ -62,6 +62,7 @@ def makeGraph():
 
     plt.legend(loc='upper left')
     plt.grid(True)
+    plt.yscale('log')
     plt.xlabel('Jours à partir du 17 mars 2020')
     plt.title('Avancé du COVID-19 en France du ' + str(datetime.datetime.today().strftime("%A %d %B %Y")))
     plt.savefig('data/franceTotal.png')

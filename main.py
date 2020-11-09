@@ -104,7 +104,7 @@ def makeGraph():
     totalcases = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){50})', str(p.text[index:indexEnd]))
 
     totalCasesCountries = []
-    totalCasesCountries = (re.findall(r"[\d]{2,3},[\d]{3}|[\d]{1,3},[\d]{3},[\d]{3}", str(totalcases)))[:nbrCountries]
+    totalCasesCountries = (re.findall(r"[\d]{1,3},[\d]{3},[\d]{3}|[\d]{2,3},[\d]{3}", str(totalcases)))[:nbrCountries]
 
     totaldeaths = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){180})', str(p.text[index:indexEnd]))
     totalDeathsCountries = []

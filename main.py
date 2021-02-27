@@ -96,34 +96,23 @@ def makeGraph():
 
     # Graphe 4
     nbrCountries = 15
-    index = p.text.find('id="main_table_countries_today"')
-    indexEnd = index + p.text[index:].find("</table>")
 
-    countries = re.findall(r'(?<=<a class="mt_a" href="country\/)(.*)(?=\/">)', str(p.text[index:indexEnd]))
-    countries = [country.upper() for country in countries][:nbrCountries]
-    totalcases = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){50})', str(p.text[index:indexEnd]))
-
+    countries = []
     totalCasesCountries = []
-    totalCasesCountries = (re.findall(r"[\d]{1,3},[\d]{3},[\d]{3}|[\d]{2,3},[\d]{3}", str(totalcases)))[:nbrCountries]
-
-    totaldeaths = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){180})', str(p.text[index:indexEnd]))
     totalDeathsCountries = []
-
-    totalRecovered = re.findall(r'(?<=<\/a><\/td>\n<td style="font-weight: bold; text-align:right">)((.|\n){380})', str(p.text[index:indexEnd]))
     totalRecoveredCountries = []
 
-    for x in range(0, nbrCountries):
-        indexRecovered = str(totalRecovered[x]).find('<td style="font-weight: bold; text-align:right">')
-        totalRecovered[x] = str(totalRecovered[x]).replace("N/A", "0,000")
-        totalRecoveredCountries.append(int(re.findall(r"[\d]{1,2},[\d]{3},[\d]{3}|[\d]{1,5},[\d]{3}|[\d]{1,3}", str(
-            totalRecovered[x])[indexRecovered+48:indexRecovered+70])[0].replace(",", "")))
+    apiCountry = requests.get('https://worldometer.herokuapp.com/api/coronavirus/all/')
+    apiCountry = apiCountry.json()["data"]
 
-    for x in range(0, nbrCountries):
-        totalDeathsCountries.append(int(re.findall(
-            r"[\d]{1,5},[\d]{3}|[\d]{1,3}", str(totaldeaths[x][0][100:]))[0].replace(",", "")))
-
-    for x in range(0, nbrCountries):
-        totalCasesCountries[x] = int(totalCasesCountries[x].replace(",", ""))
+    for nbr in range(1, nbrCountries+1):
+        countries.append(apiCountry[nbr]["Country"])
+        totalCasesCountries.append(int(apiCountry[nbr]["Total Cases"].replace(',', '')))
+        totalDeathsCountries.append(int(apiCountry[nbr]["Total Deaths"].replace(',', '')))
+        if (apiCountry[nbr]["Total Recovered"] == "N/A"):
+            totalRecoveredCountries.append(0)
+        else:
+            totalRecoveredCountries.append(int(apiCountry[nbr]["Total Recovered"].replace(',', '')))
 
     year = countries[::-1]
     totalcases = totalCasesCountries[::-1]
@@ -150,38 +139,18 @@ while True:
 
         spinner.color = 'cyan'
         spinner.text = 'Scrapping des données'
-        # Parsing des données sur worldometers.info
-        p = requests.get('https://www.worldometers.info/coronavirus/')
+        # Parsing des données sur l'API worldometers
+        api = requests.get('https://worldometer.herokuapp.com/api/coronavirus/country/france')
+        api = api.json()["data"]
 
-        indexFrance = p.text.find('<a class="mt_a" href="country/france/">France</a>')
-        indexFranceEnd = indexFrance + p.text[indexFrance:].find("</tr>")
-
-        PlaceInWorld = p.text[:indexFranceEnd].count('href="country/')
-
-        cases = re.findall(r'[\d]{1,2}.[\d]{3}.[\d]{3}|[\d]{1,3}.[\d]{3}|\d+', str(p.text[indexFrance:indexFranceEnd]).replace(",", ".").replace("background-color:#c8e6c9; color:#000", ""))
-        data = ["Total Cases", "New Cases", "Total Deaths",
-                "New Deaths", "Total Recovered", "Active Cases", "Critical", "New Recovered",
-                "New Active", "New Critical", "PlaceInWorld", "Total Tests", "New Tests"]
+        PlaceInWorld = api['place']
 
         numberOfDay = (datetime.datetime.today()-datetime.datetime(2020, 3, 16)).days
         numberOfDayDeconfinement = (datetime.datetime.today()-datetime.datetime(2020, 5, 10)).days
 
         verif = False
 
-        # Changer les données manuellements si il y a des erreurs au niveau de la source
-        # cases[0] = 0 # Cas totaux
-        # cases[1] = 0 # nouveaux cas
-        # cases[2] = 0 # morts totaux
-        # cases[3] = 0 # nouveaux morts
-        # cases[4] = 0 # guéris totaux
-        # cases[5] = 0 # New Recovered| Not used here
-        # cases[6] = 0 # malades
-        # cases[7] = 0 # cas critique/en réanimation
-        # cases[8] = 0 # nouveaux guéris| Not used here
-        # cases[9] = 0 # nouveaux malades| Not used here
-        # cases[10] = 0 # nouveaux critique/en réanimation
-
-        #cases.insert(5, '0')
+        #api["New Recovered"] = 0
 
         # Retrouver les données d'hier
         f1 = open("data/dataFrance.csv", "r")
@@ -190,7 +159,7 @@ while True:
 
         try:
             # Vérifier si toutes les données sont publiées
-            if (last_line[0] != str("20" + datetime.datetime.today().strftime("%y-%m-%d")) and cases[15]):
+            if (last_line[0] != str("20" + datetime.datetime.today().strftime("%y-%m-%d")) and api["New Recovered"] != ""):
                 verif = True
             else:
                 spinner.color = 'magenta'
@@ -200,10 +169,10 @@ while True:
 
         if (verif):
 
-            newRecovered = int(cases[4].replace(".", "")) - int(last_line[5].replace(".", ""))
-            newCritical = int(cases[7].replace(".", "")) - int(last_line[7].replace(".", ""))
-            newActive = int(cases[6].replace(".", "")) - int(last_line[6].replace(".", ""))
-            newTests = int(cases[10].replace(".", "")) - int(last_line[12].replace(".", ""))
+            newRecovered = int(api["Total Recovered"].replace(",", "")) - int(last_line[5].replace(".", ""))
+            newCritical = int(api["Critical"].replace(",", "")) - int(last_line[7].replace(".", ""))
+            newActive = int(api["Active Cases"].replace(",", "")) - int(last_line[6].replace(".", ""))
+            newTests = int(api["Total Tests"].replace(",", "")) - int(last_line[12].replace(".", ""))
 
             # Pourcentage des nouveaux cas comparés au cas d'hier
             if (int(last_line[9].replace(".", "")) == 0):
@@ -212,9 +181,9 @@ while True:
                 newActivePercent = round(100 * (int(newActive)/int(last_line[9].replace(".", ""))), 2)
 
             if (int(last_line[4].replace(".", "")) == 0):
-                newDeathPercent = round(100 * int(cases[3].replace(".", "")), 2)
+                newDeathPercent = round(100 * int(api["New Deaths"].replace(",", "")), 2)
             else:
-                newDeathPercent = round(100 * (int(cases[3].replace(".", ""))/int(last_line[4].replace(".", ""))), 2)
+                newDeathPercent = round(100 * (int(api["New Deaths"].replace(",", ""))/int(last_line[4].replace(".", ""))), 2)
                 
             if (int(last_line[8].replace(".", "")) == 0):
                 newRecoveredPercent = round(100 * (int(newRecovered)), 2)
@@ -225,11 +194,19 @@ while True:
                 newCriticalPercent = round(100 * int(newCritical), 2)
             else:
                 newCriticalPercent = round(100 * (int(newCritical)/int(last_line[10].replace(".", ""))), 2)
+            
+            if (api["New Cases"][0] == "+"):
+                api["New Cases"] = api["New Cases"][1:]
 
+            if (api["New Deaths"][0] == "+"):
+                api["New Deaths"] = api["New Deaths"][1:]
             
             # Enregistrer les données dans le CSV
             f = open("data/dataFrance.csv", "a+")
-            f.write(str("20" + datetime.datetime.today().strftime("%y-%m-%d")) + "," + cases[0] + "," + cases[1] + "," + cases[2] + "," + cases[3] + "," + cases[4] + "," + cases[6] + "," + cases[7] + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + "," + str(PlaceInWorld) + "," + cases[10] + "," + str(newTests) + "\n")
+            f.write(str("20" + datetime.datetime.today().strftime("%y-%m-%d")) + "," + api["Total Cases"].replace(',', '.') + "," + api["New Cases"].replace(',', '.') + "," + 
+                    api["Total Deaths"].replace(',', '.') + "," + api["New Deaths"].replace(',', '.') + "," + api["Total Recovered"].replace(',', '.') + "," + 
+                    api["Active Cases"].replace(',', '.') + "," + api["Critical"].replace(',', '.') + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + 
+                    "," + str(PlaceInWorld) + "," + api["Total Tests"].replace(',', '.') + "," + str(newTests) + "\n")
             f.close()
 
             makeTabOfData()
@@ -237,25 +214,24 @@ while True:
 
             # Message à tweeter
             ligne1 = "La 🇫🇷 est " + str(PlaceInWorld) + "ème au 🌎\n"
-            ligne2 = "🟢 " + cases[4].replace(".", ",") + " guéris +" + str(newRecovered) + " [" + str(newRecoveredPercent) + "%]\n"
+            ligne2 = "🟢 " + api["Total Recovered"] + " guéris +" + str(newRecovered) + " [" + str(newRecoveredPercent) + "%]\n"
             if (newActive < 0):
-                ligne3 = "🟠 " + cases[6].replace(".", ",") + " malades " + str(newActive) + " [" + str(newActivePercent) + "%]\n"
+                ligne3 = "🟠 " + api["Active Cases"] + " malades " + str(newActive) + " [" + str(newActivePercent) + "%]\n"
             else:
-                ligne3 = "🟠 " + cases[6].replace(".", ",") + " malades +" + str(newActive) + " [" + str(newActivePercent) + "%]\n"
+                ligne3 = "🟠 " + api["Active Cases"] + " malades +" + str(newActive) + " [" + str(newActivePercent) + "%]\n"
             if (newCritical < 0):
-                ligne4 = "🔴 " + cases[7].replace(".", ",") + " cas graves " + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
+                ligne4 = "🔴 " + api["Critical"] + " cas graves " + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
             else:
-                ligne4 = "🔴 " + cases[7].replace(".", ",") + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
-            ligne5 = "⚫ " + cases[2].replace(".", ",") + " décès +" + cases[3].replace(
-                ".", "") + " [" + str(newDeathPercent) + "%]\n"
+                ligne4 = "🔴 " + api["Critical"] + " cas graves +" + str(newCritical) + " [" + str(newCriticalPercent) + "%]\n"
+            ligne5 = "⚫ " + api["Total Deaths"] + " décès +" + api["New Deaths"].replace(",", "") + " [" + str(newDeathPercent) + "%]\n"
             if (newTests > 0):
-                ligne6 = "💉 " + cases[10].replace(".", ",") + " tests +" + str(newTests) + "\n\n"
+                ligne6 = "💉 " + api["Total Tests"] + " tests +" + str(newTests) + "\n\n"
             else:
                 ligne6 = "\n\n"
-            ligne7 = cases[0].replace(".", ",") + " cas totaux +" + cases[1].replace(".", "")
+            ligne7 = api["Total Cases"] + " cas totaux +" + api["New Cases"].replace(",", "")
             ligne8 = "\n\nGraphiques📈⏬\n#COVIDー19"
             message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7 + ligne8 
-            
+
             consumer_key = config.consumer_key
             consumer_secret = config.consumer_secret
             access_token = config.access_token

@@ -70,26 +70,26 @@ def makeGraph():
 
     # Graphe 2
     #plt.plot(tabDate[1:], tabNewCases[1:], "-", label="Population touchée chaque jour", linewidth=2, color="#9b59b6")
-    plt.plot(tabDate[1:], tabNewActive[1:], "-", label="Population malade chaque jour", linewidth=2, color="#f1c40f")
+    plt.plot(tabDate[1:len(tabDate) - 387], tabNewActive[388:], "-", label="Population malade chaque jour", linewidth=2, color="#f1c40f")
     #plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=2, color="#2ecc71")
     #plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=2, color="#e74c3c")
     #plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=2, color="#2c3e50")
 
     plt.legend(loc='best')
     plt.grid(True)
-    plt.xlabel('Jours à partir du 18 mars 2020')
+    plt.xlabel('Jours à partir du 13 avril 2021')
     plt.title('Avancé du COVID-19 en France du ' + str(datetime.datetime.today().strftime("%A %d %B %Y")))
     plt.savefig('data/franceToday.png')
     plt.clf()
 
     # Graphe 3
-    plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=2, color="#2ecc71")
-    plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=2, color="#e74c3c")
-    plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=2, color="#2c3e50")
+    plt.plot(tabDate[1:len(tabDate) - 387], tabNewRecovered[388:], "-", label="Population guérie chaque jour", linewidth=2, color="#2ecc71")
+    plt.plot(tabDate[1:len(tabDate) - 387], tabNewCritical[388:], "-", label="Population critique chaque jour", linewidth=2, color="#e74c3c")
+    plt.plot(tabDate[1:len(tabDate) - 387], tabNewDeaths[388:], "-", label="Population décédée chaque jour", linewidth=2, color="#2c3e50")
 
     plt.legend(loc='best')
     plt.grid(True)
-    plt.xlabel('Jours à partir du 18 mars 2020')
+    plt.xlabel('Jours à partir du 13 avril 2021')
     plt.title('Avancé du COVID-19 en France du ' + str(datetime.datetime.today().strftime("%A %d %B %Y")))
     plt.savefig('data/franceTodaySansMalade.png')
     plt.clf()
@@ -236,7 +236,7 @@ while True:
             consumer_secret = config.consumer_secret
             access_token = config.access_token
             access_token_secret = config.access_token_secret
-
+            """
             auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
             auth.set_access_token(access_token, access_token_secret)
 
@@ -251,7 +251,7 @@ while True:
             image4 = "data/global.png"
             images = (image1, image2, image3, image4)
             media_ids = [api.media_upload(i).media_id_string for i in images]
-            api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)
+            api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)"""
             spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
             spinner.start()
     else:

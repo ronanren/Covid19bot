@@ -55,7 +55,7 @@ def makeGraph():
 
     # Graphe 1
     #plt.plot(tabDate, tabTotalCases, "-", label="Population touchée", linewidth=2, color="#9b59b6")
-    plt.plot(tabDate, tabActiveCases, "-", label="Population malade", linewidth=2, color="#f1c40f")
+    plt.plot(tabDate, tabTotalCases, "-", label="Population malade", linewidth=2, color="#f1c40f")
     plt.plot(tabDate, tabTotalRecovered, "-", label="Population guérie", linewidth=2, color="#2ecc71")
     plt.plot(tabDate, tabCritical, "-", label="Population critique", linewidth=2, color="#e74c3c")
     plt.plot(tabDate, tabTotalDeaths, "-", label="Population décédée", linewidth=2, color="#2c3e50")
@@ -70,14 +70,14 @@ def makeGraph():
 
     # Graphe 2
     #plt.plot(tabDate[1:], tabNewCases[1:], "-", label="Population touchée chaque jour", linewidth=2, color="#9b59b6")
-    plt.plot(tabDate[0:len(tabDate) - 388], tabNewActive[388:], "-", label="Population malade chaque jour", linewidth=2, color="#f1c40f")
+    plt.plot(tabDate, tabNewCases, "-", label="Population malade chaque jour", linewidth=2, color="#f1c40f")
     #plt.plot(tabDate[1:], tabNewRecovered[1:], "-", label="Population guérie chaque jour", linewidth=2, color="#2ecc71")
     #plt.plot(tabDate[1:], tabNewCritical[1:], "-", label="Population critique chaque jour", linewidth=2, color="#e74c3c")
     #plt.plot(tabDate[1:], tabNewDeaths[1:], "-", label="Population décédée chaque jour", linewidth=2, color="#2c3e50")
 
     plt.legend(loc='best')
     plt.grid(True)
-    plt.xlabel('Jours à partir du 13 avril 2021')
+    plt.xlabel('Jours à partir du 17 mars 2020')
     plt.title('Avancé du COVID-19 en France du ' + str(datetime.datetime.today().strftime("%A %d %B %Y")))
     plt.savefig('data/franceToday.png')
     plt.clf()
@@ -231,7 +231,7 @@ while True:
             ligne7 = api["Total Cases"] + " cas totaux +" + api["New Cases"].replace(",", "")
             ligne8 = "\n\nGraphiques📈⏬\n#COVIDー19"
             message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7 + ligne8 
-
+            """
             consumer_key = config.consumer_key
             consumer_secret = config.consumer_secret
             access_token = config.access_token
@@ -251,7 +251,7 @@ while True:
             image4 = "data/global.png"
             images = (image1, image2, image3, image4)
             media_ids = [api.media_upload(i).media_id_string for i in images]
-            api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)
+            api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)"""
             spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
             spinner.start()
     else:

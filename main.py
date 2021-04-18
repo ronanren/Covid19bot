@@ -231,7 +231,7 @@ while True:
             ligne7 = api["Total Cases"] + " cas totaux +" + api["New Cases"].replace(",", "")
             ligne8 = "\n\nGraphiques📈⏬\n#COVIDー19"
             message = ligne1 + ligne2 + ligne3 + ligne4 + ligne5 + ligne6 + ligne7 + ligne8 
-            """
+            
             consumer_key = config.consumer_key
             consumer_secret = config.consumer_secret
             access_token = config.access_token
@@ -251,7 +251,7 @@ while True:
             image4 = "data/global.png"
             images = (image1, image2, image3, image4)
             media_ids = [api.media_upload(i).media_id_string for i in images]
-            api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)"""
+            api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)
             spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
             spinner.start()
     else:

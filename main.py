@@ -140,78 +140,48 @@ while True:
         spinner.color = 'cyan'
         spinner.text = 'Scrapping des données'
         # Parsing des données sur l'API worldometers
-        api = requests.get('https://worldometer.herokuapp.com/api/coronavirus/country/france')
-        api = api.json()["data"]
+        # api = requests.get('https://api.covid19api.com/dayone/country/france')
+        # api = api.json()
+        import requests
 
-        PlaceInWorld = api['place']
+        url = "https://disease.sh/v3/covid-19/historical/france?lastdays=800"
+
+        response = requests.request("GET", url)
+
+        data = response.json()
 
         numberOfDay = (datetime.datetime.today()-datetime.datetime(2020, 3, 16)).days
-        numberOfDayDeconfinement = (datetime.datetime.today()-datetime.datetime(2020, 5, 10)).days
 
         verif = False
-
-        #api["New Recovered"] = 0
-
-        # Retrouver les données d'hier
-        f1 = open("data/dataFrance.csv", "r")
-        last_line = f1.readlines()[-1].split(',')
-        f1.close()
+        # print(data['timeline']['cases'])
+        Year = datetime.datetime.today().strftime("%Y")
+        dateToday = datetime.datetime.today().strftime("%-m/3/") + Year[2:]
+        dateYesterday = datetime.datetime.today()- datetime.timedelta(days=2)
+        dateYesterday = dateYesterday.strftime("%-m/%-d/") + Year[2:]
 
         try:
             # Vérifier si toutes les données sont publiées
-            if (last_line[0] != str("20" + datetime.datetime.today().strftime("%y-%m-%d")) and api["New Recovered"] != ""):
+            if (data['timeline']['cases'][dateYesterday] != None):
                 verif = True
             else:
                 spinner.color = 'magenta'
                 spinner.text = 'Données déjà publiées ' + time.strftime("%H:%M:%S")
         except:
             spinner.text = 'Données pas encore publiées ' + time.strftime("%H:%M:%S")
-
+        
         if (verif):
 
-            newRecovered = int(api["Total Recovered"].replace(",", "")) - int(last_line[5].replace(".", ""))
-            newCritical = int(api["Critical"].replace(",", "")) - int(last_line[7].replace(".", ""))
-            newActive = int(api["Active Cases"].replace(",", "")) - int(last_line[6].replace(".", ""))
-            newTests = int(api["Total Tests"].replace(",", "")) - int(last_line[12].replace(".", ""))
-
+            newCases = data['timeline']['cases'][dateToday] - data['timeline']['cases'][dateYesterday]
+            newDeaths = data['timeline']['deaths'][dateToday] - data['timeline']['deaths'][dateYesterday]
+            
             # Pourcentage des nouveaux cas comparés au cas d'hier
-            if (int(last_line[9].replace(".", "")) == 0):
-                newActivePercent = round(100 * (int(newActive)), 2)
-            else:
-                newActivePercent = round(100 * (int(newActive)/int(last_line[9].replace(".", ""))), 2)
+            newDeathPercent = round(100 * (data['timeline']['deaths'][dateToday]/data['timeline']['deaths'][dateYesterday]), 2)
+            newCasesPercent = round(100 * (data['timeline']['cases'][dateToday]/data['timeline']['cases'][dateYesterday]), 2)
 
-            if (int(last_line[4].replace(".", "")) == 0):
-                newDeathPercent = round(100 * int(api["New Deaths"].replace(",", "")), 2)
-            else:
-                newDeathPercent = round(100 * (int(api["New Deaths"].replace(",", ""))/int(last_line[4].replace(".", ""))), 2)
-                
-            if (int(last_line[8].replace(".", "")) == 0):
-                newRecoveredPercent = round(100 * (int(newRecovered)), 2)
-            else:
-                newRecoveredPercent = round(100 * (int(newRecovered)/int(last_line[8].replace(".", ""))), 2)
-
-            if (int(last_line[10].replace(".", "")) == 0):
-                newCriticalPercent = round(100 * int(newCritical), 2)
-            else:
-                newCriticalPercent = round(100 * (int(newCritical)/int(last_line[10].replace(".", ""))), 2)
-            
-            if (api["New Cases"][0] == "+"):
-                api["New Cases"] = api["New Cases"][1:]
-
-            if (api["New Deaths"][0] == "+"):
-                api["New Deaths"] = api["New Deaths"][1:]
-            
-            # Enregistrer les données dans le CSV
-            f = open("data/dataFrance.csv", "a+")
-            f.write(str("20" + datetime.datetime.today().strftime("%y-%m-%d")) + "," + api["Total Cases"].replace(',', '.') + "," + api["New Cases"].replace(',', '.') + "," + 
-                    api["Total Deaths"].replace(',', '.') + "," + api["New Deaths"].replace(',', '.') + "," + api["Total Recovered"].replace(',', '.') + "," + 
-                    api["Active Cases"].replace(',', '.') + "," + api["Critical"].replace(',', '.') + "," + str(newRecovered) + "," + str(newActive) + "," + str(newCritical) + 
-                    "," + str(PlaceInWorld) + "," + api["Total Tests"].replace(',', '.') + "," + str(newTests) + "\n")
-            f.close()
-
+            """
             makeTabOfData()
             makeGraph()
-
+            
             # Message à tweeter
             ligne1 = "La 🇫🇷 est " + str(PlaceInWorld) + "ème au 🌎\n"
             ligne2 = "🟢 " + api["Total Recovered"] + " guéris +" + str(newRecovered) + " [" + str(newRecoveredPercent) + "%]\n"
@@ -253,7 +223,7 @@ while True:
             media_ids = [api.media_upload(i).media_id_string for i in images]
             api.update_status(status="📈Évolution du #COVID19 en 🇫🇷", media_ids=media_ids, in_reply_to_status_id=lastIdTweet)
             spinner.succeed('Données envoyés ' + time.strftime("%H:%M:%S"))
-            spinner.start()
+            spinner.start()"""
     else:
         spinner.text = "Pas encore l'heure pour check " + time.strftime("%H:%M:%S")
     time.sleep(300)
